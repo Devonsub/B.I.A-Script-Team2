@@ -1,0 +1,437 @@
+-- Made by Devon_Agent/Markthevil_Agent
+
+-- Update Version 0.8
+
+-- Draggable Fixed
+
+-- Sniper2 fixed
+
+-- New Guis
+
+-- enjoy it!
+
+local Lplayer = game.Players.LocalPlayer.PlayerGui
+
+local AnewGui = Instance.new("ScreenGui")
+
+local Frame1 = Instance.new("Frame")
+
+local Sniper1 = Instance.new("TextButton")
+
+local Sniper2 = Instance.new("TextButton")
+
+local MadeBy = Instance.new("TextLabel")
+
+local FText = Instance.new("TextLabel")
+
+local cclose = Instance.new("TextButton")
+
+local Aspam = Instance.new("TextButton")
+
+local LoopAspamp = Instance.new("TextButton")
+
+local SnSpam = Instance.new("TextButton")
+
+local Dgui = Instance.new("TextButton")
+
+AnewGui.Parent = Lplayer
+
+AnewGui.Name = "FastReloadScript"
+
+AnewGui.ResetOnSpawn = false
+
+--Frames
+
+Frame1.Parent = AnewGui
+
+Frame1.Name = "Background"
+
+Frame1.Draggable = true
+
+Frame1.Selectable = true
+
+Frame1.Active = true
+
+Frame1.Position = UDim2.new(0.593, 0, 0.214, 0)
+
+Frame1.Size = UDim2.new(0.387, 0, 0.35, 0)
+
+Frame1.BackgroundColor3 = Color3.new(0.498039,0.498039,0.498039)
+
+Frame1.BorderSizePixel = 5
+
+--Texts
+
+MadeBy.Draggable = true
+
+MadeBy.Parent = Frame1
+
+MadeBy.Size = UDim2.new(0.855, 0, 0.2, 0)
+
+MadeBy.Name = "MadeBy"
+
+MadeBy.Text = "Made By Devon_Agent"
+
+MadeBy.BorderSizePixel = 0
+
+MadeBy.BackgroundColor3 = Color3.new(0.34902,0.34902,0.34902)
+
+MadeBy.Font = Enum.Font.RobotoCondensed
+
+MadeBy.TextScaled = true
+
+FText.Parent = Frame1
+
+FText.Size = UDim2.new(1,0,0.228,0)
+
+FText.Position = UDim2.new(0,0,0.196,0)
+
+FText.Text = "FastReload Script v0.8"
+
+FText.BackgroundTransparency = 1
+
+FText.TextScaled = true
+
+FText.TextColor3 = Color3.new(255,255,255)
+
+--Buttons
+
+cclose.BorderSizePixel = 0
+
+cclose.Parent = Frame1
+
+cclose.BorderColor3 = Color3.new(0.666667,0,0)
+
+cclose.Name = "Cclose"
+
+cclose.Size = UDim2.new(0.145,0,0.2,0)
+
+cclose.Position = UDim2.new(0.855,0,0,0)
+
+cclose.BackgroundColor3 = Color3.new(1,0,0)
+
+cclose.Text = "X"
+
+cclose.TextScaled = true
+
+Sniper1.Parent = Frame1
+
+Sniper1.Text = "Sniper1"
+
+Sniper1.Name = "Sniper1Button"
+
+Sniper1.BackgroundColor3 = Color3.new(1,0,0)
+
+Sniper1.Position = UDim2.new(0.233,0,0.475,0)
+
+Sniper1.Size = UDim2.new(0.559,0,0.2,0)
+
+Sniper1.BorderSizePixel = 0
+
+Sniper1.TextScaled = true
+
+Sniper1.Font = Enum.Font.PatrickHand
+
+Sniper2.Parent = Frame1
+
+Sniper2.Name = "Sniper2Button"
+
+Sniper2.Text = "Sniper2"
+
+Sniper2.Position = UDim2.new(0.233,0,0.764,0)
+
+Sniper2.Size = UDim2.new(0.559,0,0.2,0)
+
+Sniper2.Font = Enum.Font.PatrickHand
+
+Sniper2.BackgroundColor3 = Color3.new(1,0,0)
+
+Sniper2.TextScaled = true
+
+Sniper2.BorderSizePixel = 0
+
+Aspam.Parent = Frame1
+
+Aspam.TextScaled = true
+
+Aspam.BorderSizePixel = 0
+
+Aspam.BackgroundColor3 = Color3.new(0,0.333333,0)
+
+Aspam.Text = "Audio"
+
+Aspam.Size = UDim2.new(0.163,0,0.2,0)
+
+Aspam.Position = UDim2.new(0.033,0,0.475,0)
+
+Aspam.Name = "Aspam"
+
+LoopAspamp.Parent = Frame1
+
+LoopAspamp.TextScaled = true
+
+LoopAspamp.BorderSizePixel = 0
+
+LoopAspamp.BackgroundColor3 = Color3.new(0.666667,0,0)
+
+LoopAspamp.Text = "Sniper Spam"
+
+LoopAspamp.Size = UDim2.new(0.163,0,0.2,0)
+
+LoopAspamp.Position = UDim2.new(0.033,0,0.764,0)
+
+LoopAspamp.Name = "StopAspam"
+
+SnSpam.Parent = Frame1
+
+SnSpam.TextScaled = true
+
+SnSpam.BorderSizePixel = 0
+
+SnSpam.BackgroundColor3 = Color3.new(1,0.666667,0)
+
+SnSpam.Text = "Sniper Spam2"
+
+SnSpam.Size = UDim2.new(0.163,0,0.2,0)
+
+SnSpam.Position = UDim2.new(0.811,0,0.475,0)
+
+SnSpam.Name = "SnSpam"
+
+Dgui.TextScaled = true
+
+Dgui.BackgroundColor3 = Color3.new(1,0.333333,0)
+
+Dgui.BorderSizePixel = 0
+
+Dgui.Text = "Destroy Gui"
+
+Dgui.Size = UDim2.new(0.163,0,0.2,0)
+
+Dgui.Position = UDim2.new(0.811,0,0.764,0)
+
+Dgui.Name = "Dgui"
+
+Dgui.Parent = Frame1
+
+-- Script 👌
+
+cclose.MouseButton1Click:Connect(function()
+
+    cclose.BackgroundColor3 = Color3.new(1,1,1)
+
+    wait(0.5)
+
+    AnewGui:Destroy()
+
+    
+
+    end)
+
+Sniper1.MouseButton1Click:Connect(function()
+
+    while true do
+
+        wait(0.1)
+
+        
+
+        local User = game:GetService("Players").LocalPlayer.Character
+
+        local Tool = User:FindFirstChild("Sniper")
+
+        
+
+        if User:FindFirstChild("Sniper") then
+
+            if User:WaitForChild("Sniper") and Tool:FindFirstChild("DB") then -- Try to find the stupid sniper that you have.
+
+            Sniper1.BackgroundColor3 = Color3.new(0,2,0)
+
+            Tool.DB:Destroy()
+
+            wait(2.2)
+
+            Sniper1.BackgroundColor3 = Color3.new(2,0,0)
+
+            end
+
+        end
+
+        end
+
+    end)
+
+Sniper2.MouseButton1Click:Connect(function()
+
+    while true do
+
+        wait(0.1)
+
+        local User = game:GetService("Players").LocalPlayer.Character
+
+        local Tool = User:FindFirstChild("Sniper 2")
+
+    
+
+    if User:FindFirstChild("Sniper 2") then
+
+       if User:WaitForChild("Sniper 2") and Tool:FindFirstChild("DB") then -- i am not repeating this 🗿
+
+           Sniper2.BackgroundColor3 = Color3.new(0,1,1)
+
+           Tool.DB:Destroy()
+
+           wait(1.4)
+
+           Sniper2.BackgroundColor3 = Color3.new(1,0,0)
+
+           end
+
+       end
+
+    end
+
+   end)
+
+Aspam.MouseButton1Click:Connect(function()
+
+    local User = game:GetService("Players").LocalPlayer.Character
+
+    local Tool = User:FindFirstChild("Sniper") or User:FindFirstChild("Sniper 2")
+
+    
+
+    if User:FindFirstChild("Sniper") or User:FindFirstChild("Sniper 2") then
+
+        Tool.Handle.Fire:Play()
+
+ 
+
+    end
+
+    end)
+
+LoopAspamp.MouseButton1Click:Connect(function()
+
+local Lplayer = game.Players.LocalPlayer.PlayerGui
+
+local Newgui = Instance.new("ScreenGui")
+
+local NewButton = Instance.new("TextButton")
+
+Newgui.Parent = Lplayer
+
+Newgui.Name = "TestingGui"
+
+Newgui.ResetOnSpawn = false
+
+NewButton.Text = "SpamSnipe1"
+
+NewButton.TextSize = 30
+
+NewButton.Draggable = true
+
+NewButton.Parent = Newgui
+
+NewButton.BackgroundColor3 = Color3.new(0,0,1)
+
+NewButton.BorderSizePixel = 5
+
+NewButton.Position = UDim2.new(0.04, 0, 0.63, 0)
+
+NewButton.Size = UDim2.new(0, 275, 0, 35)
+
+NewButton.Font = Enum.Font.PatrickHand
+
+NewButton.MouseButton1Click:Connect(function()
+
+    while true do
+
+wait(0.1)
+
+NewButton.BackgroundColor3 = Color3.new(1,1,1)
+
+local args = {
+
+    [1] = CFrame.new(Vector3.new(-2.4725799560546875, 16.38849639892578, 250), Vector3.new(0.312735378742218, -0.03842530772089958, 0.9490627646446228))
+
+}
+
+game:GetService("Players").LocalPlayer.Character.Sniper.Shot:FireServer(unpack(args))
+
+wait(0.1)
+
+NewButton.BackgroundColor3 = Color3.new(0,0,1)
+
+    end
+
+    end)
+
+-- HMMMMM
+
+    end)
+
+SnSpam.MouseButton1Click:Connect(function()
+
+    local Lplayer = game.Players.LocalPlayer.PlayerGui
+
+local Newgui = Instance.new("ScreenGui")
+
+local NewButton = Instance.new("TextButton")
+
+Newgui.Parent = Lplayer
+
+Newgui.Name = "TestingGui"
+
+Newgui.ResetOnSpawn = false
+
+NewButton.Text = "SpamSnipe2"
+
+NewButton.TextSize = 30
+
+NewButton.Draggable = true
+
+NewButton.Parent = Newgui
+
+NewButton.BackgroundColor3 = Color3.new(1,0,0)
+
+NewButton.BorderSizePixel = 5
+
+NewButton.Position = UDim2.new(0.04, 0, 0.63, 0)
+
+NewButton.Size = UDim2.new(0, 275, 0, 35)
+
+NewButton.Font = Enum.Font.PatrickHand
+
+NewButton.MouseButton1Click:Connect(function()
+
+    while true do
+
+wait(0.1)
+
+NewButton.BackgroundColor3 = Color3.new(1,1,1)
+
+local args = {
+
+    [1] = CFrame.new(Vector3.new(-2.4725799560546875, 16.38849639892578, 250), Vector3.new(0.312735378742218, -0.03842530772089958, 0.9490627646446228))
+
+}
+
+game:GetService("Players").LocalPlayer.Character:FindFirstChild("Sniper 2").Shot:FireServer(unpack(args))
+
+wait(0.1)
+
+NewButton.BackgroundColor3 = Color3.new(1,0,0)
+
+    end
+
+    end)
+
+    end)
+
+Dgui.MouseButton1Click:Connect(function()
+
+    game.Players.LocalPlayer.PlayerGui.TestingGui:Destroy()
+
+    end)
