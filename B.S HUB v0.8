@@ -1,6 +1,6 @@
 --[[
  Beta testing
-Version 0.82
+Version 0.83
 Made by Devon_Agent
 
 ]]
@@ -207,6 +207,13 @@ biabutton.MouseButton1Click:Connect(function()
 	backgroundframe.Visible = true
 	biabutton.Visible = false
 	backgroundframe.Position = biabutton.Position
+	
+
+	if game.Players.LocalPlayer.PlayerGui:FindFirstChild("newbiagui") then
+game.Players.LocalPlayer.PlayerGui:FindFirstChild("newbiagui"):Destroy()
+end
+
+	
 	--[[if backgroundframe.Visible == false then
 		backgroundframe.Position = backgroundframe.Position - UDim2.new(0,2,0)
 	end]]
@@ -424,7 +431,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/SlamminPig/rblxgames/
 		
 		
 		button2.MouseButton1Click:Connect(function() -- put in any script
-
+button1.BackgroundColor3 = Color3.new(1, 1, 1)
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 
 local Window = Library:NewWindow("Wizard Tycoon 2 Rapid Fire")
@@ -440,6 +447,8 @@ while true do
         game.Players.LocalPlayer.Character:FindFirstChild("Wand").Enabled = true
     end
 end
+wait(1.5)
+button1.BackgroundColor3 = Color3.new(0, 0, 0)
 end)
 
 Cheats:CreateButton("Rapid Fire (No Broken Sword)", function()
