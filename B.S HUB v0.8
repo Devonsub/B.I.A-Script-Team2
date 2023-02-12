@@ -5,8 +5,9 @@ Made by Devon_Agent
 
 ]]
 
-
-
+if game.Players.LocalPlayer.PlayerGui:FindFirstChild("newbiagui") then
+game.Players.LocalPlayer.PlayerGui:WaitForChild("newbiagui"):Destroy()
+end
 
 local loplayer = game.Players.LocalPlayer.PlayerGui
 local newbiagui = Instance.new("ScreenGui")
@@ -521,16 +522,9 @@ end
 	end)
 
 
-		button10.MouseButton1Click:Connect(function() -- put in any script
--- telekinesis script
+		
 
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/Devonsub/B.I.A-Script-Team/main/Telekinesis%20Script'), true))()
-
-		end)
+		
 
 
-		button11.MouseButton1Click:Connect(function()
---Underground war script
-
-loadstring(game:HttpGet(('https://raw.githubusercontent.com/Devonsub/B.I.A-Script-Team2/main/Underground%20war%20v.8'), true))()
-		end)
+		
