@@ -1,12 +1,12 @@
 --[[
  Beta testing
-Version 0.83
+Version 0.84
 Made by Devon_Agent
 
 ]]
 
-if game.Players.LocalPlayer.PlayerGui:FindFirstChild("newbiagui") then
-game.Players.LocalPlayer.PlayerGui:FindFirstChild("newbiagui"):Destroy()
+if game.Players.LocalPlayer.PlayerGui:FindFirstChild("BIAGUI") then
+game.Players.LocalPlayer.PlayerGui:FindFirstChild("BIAGUI"):Destroy()
 end
 
 local loplayer = game.Players.LocalPlayer.PlayerGui
@@ -431,7 +431,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/SlamminPig/rblxgames/
 		
 		
 		button2.MouseButton1Click:Connect(function() -- put in any script
-button1.BackgroundColor3 = Color3.new(1, 1, 1)
+
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 
 local Window = Library:NewWindow("Wizard Tycoon 2 Rapid Fire")
@@ -447,8 +447,6 @@ while true do
         game.Players.LocalPlayer.Character:FindFirstChild("Wand").Enabled = true
     end
 end
-wait(1.5)
-button1.BackgroundColor3 = Color3.new(0, 0, 0)
 end)
 
 Cheats:CreateButton("Rapid Fire (No Broken Sword)", function()
@@ -464,9 +462,10 @@ end)
 		
 		
 		button3.MouseButton1Click:Connect(function() -- put in any script
-
+button3.BackgroundColor3 = Color3.new(1, 1, 1)
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/Devonsub/B.I.A-Script-Team/main/Fly%20v3'), true))()
-
+wait(1)
+button3.BackgroundColor3 = Color3.new(0, 0, 0)
 		end)
 		
 		
