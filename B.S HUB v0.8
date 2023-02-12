@@ -1,12 +1,12 @@
 --[[
  Beta testing
-Version 0.8
+Version 0.82
 Made by Devon_Agent
 
 ]]
 
 if game.Players.LocalPlayer.PlayerGui:FindFirstChild("newbiagui") then
-game.Players.LocalPlayer.PlayerGui:WaitForChild("newbiagui"):Destroy()
+game.Players.LocalPlayer.PlayerGui:FindFirstChild("newbiagui"):Destroy()
 end
 
 local loplayer = game.Players.LocalPlayer.PlayerGui
