@@ -1,0 +1,469 @@
+--[[ Version 0.9
+Made by Devon_Agent
+]]
+
+if game.Players.LocalPlayer.PlayerGui:FindFirstChild("BIAGUI") then
+game.Players.LocalPlayer.PlayerGui:FindFirstChild("BIAGUI"):Destroy()
+end
+
+local loplayer = game.Players.LocalPlayer.PlayerGui
+local newbiagui = Instance.new("ScreenGui")
+local backgroundframe = Instance.new("Frame")
+local closebutton = Instance.new("TextButton")
+local biabutton = Instance.new("ImageButton")
+local background2 = Instance.new("Frame")
+local textframe = Instance.new("Frame")
+local biaimagelabel = Instance.new("ImageLabel")
+local biatextlb = Instance.new("TextLabel")
+local line = Instance.new("Frame")
+local bottomselectframe = Instance.new("Frame")
+local topswtichframe = Instance.new("Frame")
+local welcometextlabel = Instance.new("TextLabel")
+local hub1 = Instance.new("TextButton")
+local hub2 = Instance.new("TextButton")
+local madeby = Instance.new("TextLabel")
+newbiagui.Parent = loplayer
+newbiagui.Name = "BIAGUI"
+newbiagui.ResetOnSpawn = false
+-- frames
+backgroundframe.Parent = newbiagui
+backgroundframe.Name = "backgroundframegui"
+backgroundframe.Draggable = true
+backgroundframe.Selectable = true
+backgroundframe.Active = true
+backgroundframe.Visible = false
+backgroundframe.Position = UDim2.new(0.236, 0,0.222, 0)
+backgroundframe.Size = UDim2.new(0.528, 0,0.553, 0)
+backgroundframe.BackgroundColor3 = Color3.new(0.129412, 0.129412, 0.129412)
+backgroundframe.BorderSizePixel = 0
+local uicorner1 = Instance.new("UICorner")
+uicorner1.Parent = backgroundframe
+-- 
+background2.Parent = backgroundframe
+background2.Name = "Background2"
+background2.Position = UDim2.new(0.036, 0,0.209, 0)
+background2.Size = UDim2.new(0.928, 0,0.742, 0)
+background2.BackgroundColor3 = Color3.new(0.278431, 0.278431, 0.278431) 
+background2.BorderSizePixel = 0
+--
+line.Parent = background2
+line.Name = "Wline"
+line.Position = UDim2.new(0.253, 0,0, 0)
+line.Size = UDim2.new(0.004, 0,1, 0)
+line.BackgroundColor3 = Color3.new(1, 1, 1) 
+line.BorderSizePixel = 0
+--
+textframe.Parent = backgroundframe
+textframe.Name = "Textframe"
+textframe.Position = UDim2.new(0,0,0,0)
+textframe.Size = UDim2.new(1, 0,0.157, 0)
+textframe.BackgroundColor3 = Color3.new(0.0431373, 0.0431373, 0.0431373)
+textframe.BorderSizePixel = 0
+--
+topswtichframe.Parent = background2
+topswtichframe.Name = "Topswtichframe"
+topswtichframe.Position = UDim2.new(0.256, 0,0, 0)
+topswtichframe.Size = UDim2.new(0.744, 0,0.154, 0)
+topswtichframe.BackgroundColor3 = Color3.new(0.0941176, 0.0941176, 0.0941176) 
+topswtichframe.BorderSizePixel = 0
+--
+bottomselectframe.Parent = background2
+bottomselectframe.Name = "Topswtichframe"
+bottomselectframe.Position = UDim2.new(0.256, 0,0.153, 0)
+bottomselectframe.Size = UDim2.new(0.744, 0,0.847, 0)
+bottomselectframe.BackgroundColor3 = Color3.new(0.254902, 0.254902, 0.254902) 
+bottomselectframe.BorderSizePixel = 0
+-- text
+biatextlb.Parent = textframe
+biatextlb.Name = "Biatextlb"
+biatextlb.Text = "BETA TESTING" --   TITLE
+biatextlb.Font = Enum.Font.FredokaOne
+biatextlb.TextScaled = true
+biatextlb.Position = UDim2.new(0.187, 0,0.098, 0)
+biatextlb.Size = UDim2.new(0.622, 0,0.785, 0)
+biatextlb.TextColor3 = Color3.new(1, 1, 1)
+biatextlb.BackgroundTransparency = 1
+biatextlb.BorderSizePixel = 0
+--
+welcometextlabel.Parent = bottomselectframe
+welcometextlabel.Name = "welcometextlabel"
+welcometextlabel.Text = "Welcome To B.I.A Script Hub Beta 0.9      [Latest Version]" --   WELCOMING
+welcometextlabel.Font = Enum.Font.FredokaOne
+welcometextlabel.TextScaled = true
+welcometextlabel.Position = UDim2.new(0.187, 0,0.098, 0)
+welcometextlabel.Size = UDim2.new(0.622, 0,0.785, 0)
+welcometextlabel.TextColor3 = Color3.new(1, 1, 1)
+welcometextlabel.BackgroundTransparency = 1
+welcometextlabel.BorderSizePixel = 0
+
+--
+madeby.Parent = topswtichframe
+madeby.Name = "madebytextlabel"
+madeby.Text = "Made by Devon_Agent" 
+madeby.Font = Enum.Font.FredokaOne
+madeby.TextScaled = true
+madeby.Position = UDim2.new(0.13, 0,0.107, 0)
+madeby.Size = UDim2.new(0.734, 0,0.786, 0)
+madeby.TextColor3 = Color3.new(0, 1, 1)
+madeby.BackgroundTransparency = 1
+madeby.BorderSizePixel = 0
+
+-- image
+
+biaimagelabel.Parent = textframe
+biaimagelabel.Name = "Biaimagelabel"
+local uiaspectRatioCon = Instance.new("UIAspectRatioConstraint")
+biaimagelabel.Position = UDim2.new(0.012, 0,0, 0)
+biaimagelabel.Size = UDim2.new(0.107, 0,1, 0)
+biaimagelabel.BackgroundTransparency = 1
+biaimagelabel.BorderSizePixel = 0
+biaimagelabel.Image = "rbxassetid://12134562017"
+uiaspectRatioCon.Parent = biaimagelabel
+
+
+-- image button
+
+biabutton.Parent = newbiagui
+biabutton.Name = "Biabutton"
+biabutton.Draggable = true
+biabutton.Selectable = true
+biabutton.Active = true
+local uiaspectRatioCon = Instance.new("UIAspectRatioConstraint")
+biabutton.Position = UDim2.new(0.46, 0,0.148, 0)
+biabutton.Size = UDim2.new(0.082, 0,0.129, 0)
+biabutton.BackgroundColor3 = Color3.new(0.129412, 0.129412, 0.129412)
+biabutton.BackgroundTransparency = 0.5
+biabutton.BorderSizePixel = 0
+biabutton.Image = "rbxassetid://12134562017"
+uiaspectRatioCon.Parent = biabutton
+local uicorner2 = Instance.new("UICorner")
+uicorner2.Parent = biabutton
+
+-- button
+
+closebutton.Parent = backgroundframe
+closebutton.Name = "Closebutton"
+closebutton.Text = "X"
+closebutton.Font = Enum.Font.DenkOne
+closebutton.TextScaled = true
+
+closebutton.Position = UDim2.new(0.9,0,0,0)
+closebutton.Size = UDim2.new(0.1, 0,0.157, 0)
+closebutton.TextColor3 = Color3.new(1, 1, 1)
+closebutton.BackgroundColor3 = Color3.new(1, 0, 0)
+--closebutton.BackgroundTransparency = 0
+closebutton.BorderSizePixel = 0
+
+
+hub1.Parent = background2
+hub1.Name = "hub1"
+hub1.Text = "Hub1"
+hub1.Font = Enum.Font.FredokaOne
+hub1.TextScaled = true
+hub1.Position = UDim2.new(0.019, 0,0.07, 0)
+hub1.Size = UDim2.new(0.218, 0,0.135, 0)
+hub1.TextColor3 = Color3.new(1, 1, 1)
+hub1.BackgroundColor3 = Color3.new(0.133333, 0.133333, 0.133333)
+hub1.BorderSizePixel = 0
+local uicorner3 = Instance.new("UICorner")
+uicorner3.Parent = hub1
+
+hub2.Parent = background2
+hub2.Name = "hub2"
+hub2.Text = "Hub2"
+hub2.Font = Enum.Font.FredokaOne
+hub2.TextScaled = true
+hub2.Position = UDim2.new(0.019, 0,0.256, 0)
+hub2.Size = UDim2.new(0.218, 0,0.135, 0)
+hub2.TextColor3 = Color3.new(1, 1, 1)
+hub2.BackgroundColor3 = Color3.new(0.133333, 0.133333, 0.133333)
+hub2.BorderSizePixel = 0
+local uicorner4 = Instance.new("UICorner")
+uicorner4.Parent = hub2
+
+
+-- Script
+
+biabutton.MouseButton1Click:Connect(function()
+biabutton.BackgroundColor3 = Color3.new(0,1,0)
+	backgroundframe.Visible = true
+	biabutton.Visible = false
+	backgroundframe.Position = biabutton.Position
+biabutton.BackgroundColor3 = Color3.new(0,0,0)
+end)
+
+closebutton.MouseButton1Click:Connect(function()
+	backgroundframe.Visible = false
+	biabutton.Visible = true
+end)
+
+local button1 = Instance.new("TextButton")
+	local button2 = Instance.new("TextButton")
+	local button3 = Instance.new("TextButton")
+	local button4 = Instance.new("TextButton")
+	local button5 = Instance.new("TextButton")
+	local button6 = Instance.new("TextButton")
+	local button7 = Instance.new("TextButton")
+	local button8 = Instance.new("TextButton")
+	local button9 = Instance.new("TextButton")
+local button10 = Instance.new("TextButton")
+	local button11 = Instance.new("TextButton")
+	local button12 = Instance.new("TextButton")
+
+local frame1 = Instance.new("Frame")
+frame1.Parent = hub1
+frame1.Name = "frame"
+frame1.Position = UDim2.new(1.088, 0,-0.77, 0)
+frame1.Size = UDim2.new(3.41, 0,6.296, 0)
+frame1.BackgroundTransparency = 1
+frame1.BorderSizePixel = 0
+frame1.Visible = false
+
+local frame2 = Instance.new("Frame")
+frame2.Parent = hub2
+frame2.Name = "frame"
+frame2.Position = UDim2.new(1.088, 0,-0.77, 0)
+frame2.Size = UDim2.new(3.41, 0,6.296, 0)
+frame2.BackgroundTransparency = 1
+frame2.BorderSizePixel = 0
+frame2.Visible = false
+
+
+button1.Parent = frame1
+	button1.Name = "button"
+	button1.Text = "wizard tycoon kill script gui" -- script name
+	button1.Font = Enum.Font.FredokaOne
+	button1.TextScaled = true
+	button1.Position = UDim2.new(0.017, 0,0.083, 0)
+	button1.Size = UDim2.new(0.303, 0,0.244, 0)
+	button1.TextColor3 = Color3.new(1, 1, 1)
+	button1.BackgroundColor3 = Color3.new(0, 0, 0)
+	button1.BorderSizePixel = 0
+	local uicorner3 = Instance.new("UICorner")
+		uicorner3.Parent = button1
+
+button2.Parent = frame1
+		button2.Name = "button"
+		button2.Text = "drop tool (Moblie Users)"
+		button2.Font = Enum.Font.FredokaOne
+		button2.TextScaled = true
+		button2.Position = UDim2.new(0.346, 0,0.083, 0)
+		button2.Size = UDim2.new(0.303, 0,0.244, 0)
+		button2.TextColor3 = Color3.new(1, 1, 1)
+		button2.BackgroundColor3 = Color3.new(0, 0, 0)
+		button2.BorderSizePixel = 0
+		local uicorner3 = Instance.new("UICorner")
+		uicorner3.Parent = button2
+
+button3.Parent = frame1
+		button3.Name = "button"
+		button3.Text = "fly v3"
+		button3.Font = Enum.Font.FredokaOne
+		button3.TextScaled = true
+		button3.Position = UDim2.new(0.675, 0,0.083, 0)
+		button3.Size = UDim2.new(0.303, 0,0.244, 0)
+		button3.TextColor3 = Color3.new(1, 1, 1)
+		button3.BackgroundColor3 = Color3.new(0, 0, 0)
+		button3.BorderSizePixel = 0
+		local uicorner3 = Instance.new("UICorner")
+		uicorner3.Parent = button3
+
+button4.Parent = frame1
+		button4.Name = "button"
+		button4.Text = "chat troll gui"
+		button4.Font = Enum.Font.FredokaOne
+		button4.TextScaled = true
+		button4.Position = UDim2.new(0.017, 0,0.376, 0)
+		button4.Size = UDim2.new(0.303, 0,0.244, 0)
+		button4.TextColor3 = Color3.new(1, 1, 1)
+		button4.BackgroundColor3 = Color3.new(0, 0, 0)
+		button4.BorderSizePixel = 0
+		local uicorner3 = Instance.new("UICorner")
+		uicorner3.Parent = button4
+
+
+button5.Parent = frame1
+		button5.Name = "button"
+		button5.Text = "infinite yeild admin"
+		button5.Font = Enum.Font.FredokaOne
+		button5.TextScaled = true
+		button5.Position = UDim2.new(0.346, 0,0.376, 0)
+		button5.Size = UDim2.new(0.303, 0,0.244, 0)
+		button5.TextColor3 = Color3.new(1, 1, 1)
+		button5.BackgroundColor3 = Color3.new(0, 0, 0)
+		button5.BorderSizePixel = 0
+		local uicorner3 = Instance.new("UICorner")
+		uicorner3.Parent = button5
+
+	button6.Parent = frame1
+		button6.Name = "button"
+		button6.Text = "R15 animations"
+		button6.Font = Enum.Font.FredokaOne
+		button6.TextScaled = true
+		button6.Position = UDim2.new(0.675, 0,0.376, 0)
+		button6.Size = UDim2.new(0.303, 0,0.244, 0)
+		button6.TextColor3 = Color3.new(1, 1, 1)
+		button6.BackgroundColor3 = Color3.new(0, 0, 0)
+		button6.BorderSizePixel = 0
+		local uicorner3 = Instance.new("UICorner")
+		uicorner3.Parent = button6
+
+button7.Parent = frame1
+		button7.Name = "button"
+		button7.Text = "adopt me gui"
+		button7.Font = Enum.Font.FredokaOne
+		button7.TextScaled = true
+		button7.Position = UDim2.new(0.017, 0,0.679, 0)
+		button7.Size = UDim2.new(0.303, 0,0.244, 0)
+		button7.TextColor3 = Color3.new(1, 1, 1)
+		button7.BackgroundColor3 = Color3.new(0, 0, 0)
+		button7.BorderSizePixel = 0
+		local uicorner3 = Instance.new("UICorner")
+		uicorner3.Parent = button7
+
+button8.Parent = frame1
+		button8.Name = "button"
+		button8.Text = "lucky block, blocks gui"
+		button8.Font = Enum.Font.FredokaOne
+		button8.TextScaled = true
+		button8.Position = UDim2.new(0.346, 0,0.679, 0)
+		button8.Size = UDim2.new(0.303, 0,0.244, 0)
+		button8.TextColor3 = Color3.new(1, 1, 1)
+		button8.BackgroundColor3 = Color3.new(0, 0, 0)
+		button8.BorderSizePixel = 0
+		local uicorner3 = Instance.new("UICorner")
+		uicorner3.Parent = button8
+
+button9.Parent = frame1
+		button9.Name = "button"
+		button9.Text = "Vhub"
+		button9.Font = Enum.Font.FredokaOne
+		button9.TextScaled = true
+		button9.Position = UDim2.new(0.675, 0,0.679, 0)
+		button9.Size = UDim2.new(0.303, 0,0.244, 0)
+		button9.TextColor3 = Color3.new(1, 1, 1)
+		button9.BackgroundColor3 = Color3.new(0, 0, 0)
+		button9.BorderSizePixel = 0
+		local uicorner3 = Instance.new("UICorner")
+		uicorner3.Parent = button9
+
+button10.Parent = frame2
+	button10.Name = "button"
+	button10.Text = "Remote Spy" -- script name
+	button10.Font = Enum.Font.FredokaOne
+	button10.TextScaled = true
+	button10.Position = UDim2.new(0.017, 0,0.083, 0)
+	button10.Size = UDim2.new(0.303, 0,0.244, 0)
+	button10.TextColor3 = Color3.new(1, 1, 1)
+	button10.BackgroundColor3 = Color3.new(0, 0, 0)
+	button10.BorderSizePixel = 0
+	local uicorner3 = Instance.new("UICorner")
+		uicorner3.Parent = button10
+
+button11.Parent = frame2
+		button11.Name = "button"
+		button11.Text = "dex explorer"
+		button11.Font = Enum.Font.FredokaOne
+		button11.TextScaled = true
+		button11.Position = UDim2.new(0.346, 0,0.083, 0)
+		button11.Size = UDim2.new(0.303, 0,0.244, 0)
+		button11.TextColor3 = Color3.new(1, 1, 1)
+		button11.BackgroundColor3 = Color3.new(0, 0, 0)
+		button11.BorderSizePixel = 0
+		local uicorner3 = Instance.new("UICorner")
+		uicorner3.Parent = button11
+
+button12.Parent = frame2
+		button12.Name = "button"
+		button12.Text = "coming soon"
+		button12.Font = Enum.Font.FredokaOne
+		button12.TextScaled = true
+		button12.Position = UDim2.new(0.675, 0,0.083, 0)
+		button12.Size = UDim2.new(0.303, 0,0.244, 0)
+		button12.TextColor3 = Color3.new(1, 1, 1)
+button12.BackgroundColor3 = Color3.new((1,1,1)
+		button12.BorderSizePixel = 0
+
+hub1.MouseButton1Click:Connect(function()
+		if frame1.Visible == false then
+		frame1.BackgroundTransparency = 0
+		frame1.Position = UDim2.new(1.088, 0,0.615, 0)
+		frame1.Visible = true
+frame2.Visible = false
+  else
+       frame1.Visible = false
+end
+
+	end)
+
+
+		button1.MouseButton1Click:Connect(function()
+button1.TextColor3 = Color3.new(0,1,0)
+button1.TextColor3 = Color3.new(1,0,1)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SlamminPig/rblxgames/main/Wizard%20Tycoon%20-%202%20Player/2pWizardTycoonGUI"))()
+button1.TextColor = BrickColor.new("Black")
+		end)
+		
+		
+		button2.MouseButton1Click:Connect(function() -- drop tools
+button2.TextColor3 = Color3.new(0,1,0)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RoboGrape/dropbuttongui/main/dropitemgui"))()
+button2.TextColor3 = Color3.new(1,1,1)
+		end)
+			
+		button3.MouseButton1Click:Connect(function()
+button3.TextColor3 = Color3.new(0,1,0)
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/Devonsub/B.I.A-Script-Team/main/Fly%20v3'), true))()
+	button3.TextColor3 = Color3.new(1,1,1)
+		end)
+		
+		button4.MouseButton1Click:Connect(function() -- put in any script
+-- chat troll
+button4.TextColor3 = Color3.new(0,1,0)
+loadstring(game:HttpGet('https://raw.githubusercontent.com/ant-7802/--/main/straightmilk.lua'))()
+	button4.TextColor3 = Color3.new(1,1,1)
+		end)
+		button5.MouseButton1Click:Connect(function()
+button5.TextColor3 = Color3.new(0,1,0)
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+button5.TextColor3 = Color3.new(1,1,1)
+		end)
+		button6.MouseButton1Click:Connect(function()
+button6.TextColor3 = Color3.new(0,1,0)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/LunarWareOP/Animation-Changer-Source/main/Script", true))()
+button6.TextColor3 = Color3.new(1,1,1)
+		end)	
+		button7.MouseButton1Click:Connect(function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/1201for/V.G-Hub/main/V.Ghub'))()
+             		end)
+		button8.MouseButton1Click:Connect(function()
+button8.TextColor3 = Color3.new(0,1,0)
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/Devonsub/B.I.A-Script-Team/main/Lucky%20block%20script'), true))()
+button8.TextColor3 = Color3.new(1,1,1)
+		end)
+		button9.MouseButton1Click:Connect(function()
+button9.TextColor3 = Color3.new(1,0,1)
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/Veincx5315/Created/VHub/Simple'),true))()
+ button9.TextColor3 =Color3.new(1,1,1)
+		end)
+hub2.MouseButton1Click:Connect(function()
+		if frame2.Visible == false then
+		frame2.BackgroundTransparency = 0
+		frame2.Visible = true
+frame1.Visible = false
+  else
+       frame2.Visible = false
+end
+	end) 
+
+button10.MouseButton1Click:Connect(function()
+button10.TextColor3 = Color3.new(0,1,0)
+loadstring(game:HttpGet('https://pastebin.com/raw/8gnR4bt9'))()
+button10.TextColor3 = Color3.new(1,1,1)
+end)
+
+button11.MouseButton1Click:Connect(function()
+button11.TextColor3 = Color3.new(0,1,0)
+loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Dex%20Explorer.txt"))()
+button11.TextColor3 = Color3.new(1,1,1)
+end)
