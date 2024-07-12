@@ -1,5 +1,4 @@
 --New aimbot script made by devon
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Devonsub/B.I.A-Script-Team2/main/Anticheat%20removal%20for%20ugw'))()
 local Lplayer = game.Players.LocalPlayer.PlayerGui
 local Newgui = Instance.new("ScreenGui")
 local NewFrame = Instance.new("TextLabel")
