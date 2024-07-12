@@ -1,0 +1,23 @@
+--[[ Remove sword anticheat, made by devon_agent ]]
+local hitbox = Vector3.new(15,2,15)
+
+
+while wait() do
+  local plrs = game.Players:GetPlayers()
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+if chr:FindFirstChild("L_Optimizations") ~= nil then
+chr.L_Optimizations:Remove()
+wait()
+chr.L_AntiCheat:Remove()
+end
+  for i, v in pairs(plrs) do
+    wait()
+    local plrschr = v.Character
+    if plrschr ~= nil and plrschr ~= chr and v.Team ~= plr.Team then
+      if plrschr:FindFirstChild("HumanoidRootPart") ~= nil then
+        plrschr.HumanoidRootPart.Size = hitbox
+      end
+    end
+  end
+end
