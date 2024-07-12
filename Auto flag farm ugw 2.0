@@ -1,0 +1,153 @@
+--Auto get flag in ugw, made by devon
+wait()
+local underground = Vector3.new(3, -22, 1)
+local underblue = Vector3.new(-55, 3, -222)
+local underred = Vector3.new(56, 3, 222)
+
+local Lplayer = game.Players.LocalPlayer.PlayerGui
+local Newgui = Instance.new("ScreenGui")
+local NewButton = Instance.new("TextButton")
+local Newgui2 = Instance.new("ScreenGui")
+local NewButton2 = Instance.new("TextButton")
+local mouse = game.Players.LocalPlayer:GetMouse()
+Newgui.Parent = Lplayer
+Newgui.Name = "GetRedFlag"
+Newgui.ResetOnSpawn = false
+NewButton.Text = "Red Flag"
+NewButton.TextSize = 30
+NewButton.Draggable = true
+NewButton.Parent = Newgui
+NewButton.Position = UDim2.new(0.04, 0, 0.63, 0)
+NewButton.Size = UDim2.new(0, 275, 0, 35)
+NewButton.BackgroundColor3 = Color3.new(1,0,0)
+
+Newgui2.Parent = Lplayer
+Newgui2.Name = "GetBlueFlag"
+Newgui2.ResetOnSpawn = false
+NewButton2.Text = "Blue Flag"
+NewButton2.TextSize = 30
+NewButton2.Draggable = true
+NewButton2.Parent = Newgui
+NewButton2.Position = UDim2.new(0.04, 0, 0.73, 0)
+NewButton2.Size = UDim2.new(0, 275, 0, 35)
+NewButton2.BackgroundColor3 = Color3.new(0,0,1)
+local canclick = 1
+-- local loop = 1
+
+
+local function redflag()
+  local plr = game:GetService("Players").LocalPlayer
+  local chr = plr.Character
+  local cooldown = 5
+  local cooldown2 = 30
+  local flagtype = {game.Workspace.Map.Red.Flag.Handle,game.Workspace.Map.Blue.Flag.Handle}
+  if chr then
+    if chr:FindFirstChild("HumanoidRootPart") ~= nil then
+    print("Running")
+      flagtype[1].Position = underblue + Vector3.new(0,30,0)
+    chr.HumanoidRootPart.CFrame = CFrame.new(underblue)
+    wait(1)
+      chr.HumanoidRootPart.CFrame = CFrame.new(underred)
+      wait(1)
+      chr.HumanoidRootPart.CFrame = CFrame.new(underground)
+      NewButton.Text = "Locating.."
+      wait(cooldown2)
+      if game.Workspace.Map.Red.Flag.Handle ~= nil then
+      flagtype[1].Position = chr.HumanoidRootPart.Position
+      NewButton.Text = "Wait 30s"
+      else
+        NewButton.Text = "Error"
+        wait(1)
+        canclick = 1
+      NewButton.Text = "Red flag"
+    NewButton.BackgroundColor3 = Color3.new(1,0,0)
+      end
+    wait(cooldown2)
+      chr.HumanoidRootPart.CFrame = CFrame.new(underblue)
+      wait(1)
+      canclick = 0
+      NewButton.Text = "Looping.."
+    --NewButton.BackgroundColor3 = Color3.new(1,0,0)
+    chr.HumanoidRootPart.CFrame = flagtype[2].CFrame
+    wait(1)
+    flagtype[1].Position = underblue + Vector3.new(0,30,0)
+    wait()
+    chr.HumanoidRootPart.CFrame = CFrame.new(underground)
+      wait()
+      redflag()
+      else
+    print("Couldnt find rootpart")
+  end
+  end
+end
+
+local function blueflag()
+  local plr = game:GetService("Players").LocalPlayer
+  local chr = plr.Character
+  local cooldown = 5
+  local cooldown2 = 30
+  local flagtype = {game.Workspace.Map.Blue.Flag.Handle,game.Workspace.Map.Red.Flag.Handle}
+  if chr then
+    if chr:FindFirstChild("HumanoidRootPart") ~= nil then
+    print("Running")
+      flagtype[1].Position = underred + Vector3.new(0,30,0)
+    chr.HumanoidRootPart.CFrame = CFrame.new(underred)
+    wait(1)
+      chr.HumanoidRootPart.CFrame = CFrame.new(underblue)
+      wait(1)
+      chr.HumanoidRootPart.CFrame = CFrame.new(underground)
+      NewButton2.Text = "Locating.."
+      wait(cooldown2)
+      if game.Workspace.Map.Blue.Flag.Handle ~= nil then
+      flagtype[1].Position = chr.HumanoidRootPart.Position
+      NewButton2.Text = "Wait 30s"
+      else
+        NewButton2.Text = "Error"
+        wait(1)
+        canclick = 1
+      NewButton2.Text = "Red flag"
+    NewButton2.BackgroundColor3 = Color3.new(1,0,0)
+      end
+    wait(cooldown2)
+      chr.HumanoidRootPart.CFrame = CFrame.new(underred)
+      wait(1)
+      canclick = 0
+      NewButton2.Text = "Looping.."
+    --NewButton.BackgroundColor3 = Color3.new(1,0,0)
+    chr.HumanoidRootPart.CFrame = flagtype[2].CFrame
+    wait(1)
+    flagtype[1].Position = underred + Vector3.new(0,30,0)
+    wait()
+    chr.HumanoidRootPart.CFrame = CFrame.new(underground)
+      wait()
+      blueflag()
+      else
+    print("Couldnt find rootpart")
+  end
+  end
+end
+
+NewButton.MouseButton1Click:Connect(function()
+ if canclick == 1 then
+  if game.Workspace.Map.Red.Flag.Handle ~= nil then
+    NewButton.Text = "Loading.."
+  NewButton.BackgroundColor3 = Color3.new(1,1,1)
+   canclick = 0
+  redflag()
+  else
+    NewButton.Text = "Error"
+  end
+  end
+end)
+NewButton2.MouseButton1Click:Connect(function()
+  if canclick == 1 then
+  if game.Workspace.Map.Blue.Flag.Handle ~= nil then
+    NewButton2.Text = "Loading.."
+  NewButton2.BackgroundColor3 = Color3.new(1,1,1)
+   canclick = 0
+  blueflag()
+  else
+    NewButton2.Text = "Error"
+  end
+  end
+end)
