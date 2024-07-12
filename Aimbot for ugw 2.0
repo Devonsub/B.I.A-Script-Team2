@@ -1,4 +1,5 @@
 --New aimbot script made by devon
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Devonsub/B.I.A-Script-Team2/main/Anticheat%20removal%20for%20ugw'))()
 local Lplayer = game.Players.LocalPlayer.PlayerGui
 local Newgui = Instance.new("ScreenGui")
 local NewFrame = Instance.new("TextLabel")
@@ -70,7 +71,7 @@ local function findtarget2()
   local plrs = game.Players:GetPlayers()
   local items = {"Rocket"}
   local target = nil
-  local distance = 800
+  local distance = 900
   for i, v in pairs(plrs) do
     if v.Character ~= plrchr then
       local plrschr = v.Character
@@ -102,8 +103,31 @@ NewButton.MouseButton1Click:Connect(function()
   local plrchr = game.Players.LocalPlayer.Character
   if plrchr:FindFirstChild("Sword") == nil then
     plr.Backpack.Sword.Parent = plrchr
+    
     if plrchr:FindFirstChild("Sniper") == nil then
+      plr.Backpack.Sniper.GripPos = Vector3.new(10,0,-10)
+      wait()
       plr.Backpack.Sniper.Parent = plrchr
+      if plrchr:FindFirstChild("Rocket") == nil then
+        plr.Backpack.Rocket.GripPos = Vector3.new(10,0,-10)
+        wait()
+      plr.Backpack.Rocket.Parent = plrchr
+      end
+    end
+  end
+  
+   if plrchr:FindFirstChild("Sniper") == nil then
+     plr.Backpack.Sniper.GripPos = Vector3.new(10,0,-10)
+     wait()
+    plr.Backpack.Sniper.Parent = plrchr
+    
+    if plrchr:FindFirstChild("Sword") == nil then
+      plr.Backpack.Sword.Parent = plrchr
+      if plrchr:FindFirstChild("Rocket") == nil then
+        plr.Backpack.Rocket.GripPos = Vector3.new(10,0,-10)
+        wait()
+      plr.Backpack.Rocket.Parent = plrchr
+      end
     end
   end
 --end
