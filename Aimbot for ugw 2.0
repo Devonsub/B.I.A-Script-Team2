@@ -101,9 +101,9 @@ NewButton.MouseButton1Click:Connect(function()
   local plr = game.Players.LocalPlayer
   local plrchr = game.Players.LocalPlayer.Character
   if plrchr:FindFirstChild("Sword") == nil then
-    plr.BackPack.Sword.Parent = plrchr
+    plr.Backpack.Sword.Parent = plrchr
     if plrchr:FindFirstChild("Sniper") == nil then
-      plr.BackPack.Sniper.Parent = plrchr
+      plr.Backpack.Sniper.Parent = plrchr
     end
   end
 --end
