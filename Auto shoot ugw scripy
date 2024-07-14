@@ -1,103 +1,5 @@
---New aimbot script made by devon
-local Lplayer = game.Players.LocalPlayer.PlayerGui
-local Newgui = Instance.new("ScreenGui")
-local NewFrame = Instance.new("TextLabel")
-local NewButton2 = Instance.new("TextButton")
-local NewButton = Instance.new("TextButton")
-local mouse = game.Players.LocalPlayer:GetMouse()
-Newgui.Parent = Lplayer
-Newgui.Name = "TestingGui"
-Newgui.ResetOnSpawn = false
-NewButton.Text = "Shoot Sniper"
-NewButton.TextSize = 30
-NewButton.Draggable = true
-NewButton.Parent = Newgui
-NewButton.Position = UDim2.new(0.04, 0, 0.63, 0)
-NewButton.Size = UDim2.new(0, 275, 0, 35)
-NewButton.TextColor3 = Color3.new(1,1,1)
-NewButton.BackgroundColor3 = Color3.new(0,0,0)
-
-NewButton2.Text = "Shoot Rocket"
-NewButton2.TextSize = 30
-NewButton2.Draggable = true
-NewButton2.Parent = Newgui
-NewButton2.Position = UDim2.new(0.04, 0, 0.73, 0)
-NewButton2.Size = UDim2.new(0, 275, 0, 35)
-
-NewFrame.Text = "Detector"
-NewFrame.TextSize = 20
-NewFrame.Draggable = true
-NewFrame.Parent = NewButton
-NewFrame.Position = UDim2.new(0.06, 0, 0.93, 0)
-NewFrame.Size = UDim2.new(0, 275, 0, 35)
-NewFrame.TextColor3 = Color3.new(1,1,1)
-NewFrame.BackgroundColor3 = Color3.new(0,0,0)
 local prefix = "!"
 local avoid = {"devonareann","Devon_Agent"}
-distance = 800
-local function findtarget()
-  local plr = game.Players.LocalPlayer
-  local plrchr = game.Players.LocalPlayer.Character
-  local plrs = game.Players:GetPlayers()
-  local items = {"Sniper"}
-  local target = nil
-  for i, v in pairs(plrs) do
-    if v.Character ~= plrchr then
-      local plrschr = v.Character
-      if plrschr:FindFirstChild("HumanoidRootPart") ~= nil then
-      if (plrschr.HumanoidRootPart.Position - plrchr.HumanoidRootPart.Position).magnitude < distance and v.Character.Humanoid.Health ~= 0 and v.Team ~= plr.Team and plrchr:FindFirstChild(items[1]) then
-        local detectplrs = Ray.new(plrchr.HumanoidRootPart.Position, (plrschr.HumanoidRootPart.Position - plrchr.HumanoidRootPart.Position).Unit * distance)
-        local hit, position = game.workspace:FindPartOnRayWithIgnoreList(detectplrs, {plrchr})
-        wait()
-        --print("hit", hit)
-        if hit == plrschr:FindFirstChild("HumanoidRootPart") then
-          NewFrame.Text = ""..hit.Parent.Name
-          local args = {
-    [1] = Vector3.new(plrschr.HumanoidRootPart.Position.X,plrschr.HumanoidRootPart.Position.Y,plrschr.HumanoidRootPart.Position.Z),
-    [2] = "Sniper",
-    [3] = game:GetService("Players").LocalPlayer.Character.Sniper}
-game:GetService("ReplicatedStorage").Events.Remote.ShotTarget:FireServer(unpack(args))
-         findtarget()
-        end
-      end
-    end
-  end
-end
-end
-
-local function findtarget2()
-  local plr = game.Players.LocalPlayer
-  local plrchr = game.Players.LocalPlayer.Character
-  local plrs = game.Players:GetPlayers()
-  local items = {"Rocket"}
-  local target = nil
-  --local distance = 900
-  for i, v in pairs(plrs) do
-    if v.Character ~= plrchr then
-      local plrschr = v.Character
-      if plrschr:FindFirstChild("HumanoidRootPart") ~= nil then
-      if (plrschr.HumanoidRootPart.Position - plrchr.HumanoidRootPart.Position).magnitude < distance and v.Character.Humanoid.Health ~= 0 and v.Team ~= plr.Team and plrchr:FindFirstChild(items[1]) then
-        local detectplrs = Ray.new(plrchr.HumanoidRootPart.Position, (plrschr.HumanoidRootPart.Position - plrchr.HumanoidRootPart.Position).Unit * distance)
-        local hit, position = game.workspace:FindPartOnRayWithIgnoreList(detectplrs, {plrchr})
-        wait()
-        --print("hit", hit)
-        if hit == plrschr:FindFirstChild("HumanoidRootPart") then
-          NewFrame.Text = ""..hit.Parent.Name
-          local args = {
-    [1] = Vector3.new(v.Character:FindFirstChild("HumanoidRootPart").Position.X,v.Character:FindFirstChild("HumanoidRootPart").Position.Y,v.Character:FindFirstChild("HumanoidRootPart").Position.Z),
-    [2] = "Rocket",
-    [3] = game:GetService("Players").LocalPlayer.Character.Rocket}
-game:GetService("ReplicatedStorage").Events.Remote.ShotTarget:FireServer(unpack(args))
-         findtarget2()
-        end
-      end
-    end
-  end
-end
-end
-  
-
---userinput = "Devon_Agent"
 local player = game.Players.LocalPlayer
       player.Chatted:Connect(function(msg)
         local cmd = string.sub(msg, 8)
@@ -129,50 +31,54 @@ local player = game.Players.LocalPlayer
           print("Prefix: ", prefix)
         end
         
-        if msg == prefix.."radius "..radi then
+        --[[if msg == prefix.."radius "..radi then
           distance = radi
-        end
+        end]]
       end)
-
-NewButton.MouseButton1Click:Connect(function()
---while wait(1) do
-  findtarget()
+print("Script executed")
+while wait() do
   local plr = game.Players.LocalPlayer
-  local plrchr = game.Players.LocalPlayer.Character
-  if plrchr:FindFirstChild("Sword") == nil then
-    plr.Backpack.Sword.Parent = plrchr
-    
-    if plrchr:FindFirstChild("Sniper") == nil then
-      plr.Backpack.Sniper.GripPos = Vector3.new(10,0,-10)
-      wait()
-      plr.Backpack.Sniper.Parent = plrchr
-      if plrchr:FindFirstChild("Rocket") == nil then
-        plr.Backpack.Rocket.GripPos = Vector3.new(10,0,-10)
-        wait()
-      plr.Backpack.Rocket.Parent = plrchr
-      end
-    end
-  end
+  local plrs = game.Players:GetPlayers()
+  local item = {"Sniper"}
+  local distance = 800
+  local cooldown = 5
   
-   if plrchr:FindFirstChild("Sniper") == nil then
-     plr.Backpack.Sniper.GripPos = Vector3.new(10,0,-10)
-     wait()
-    plr.Backpack.Sniper.Parent = plrchr
-    
-    if plrchr:FindFirstChild("Sword") == nil then
-      plr.Backpack.Sword.Parent = plrchr
-      if plrchr:FindFirstChild("Rocket") == nil then
-        plr.Backpack.Rocket.GripPos = Vector3.new(10,0,-10)
-        wait()
-      plr.Backpack.Rocket.Parent = plrchr
-      end
-    end
-  end
---end
-end)
-
-NewButton2.MouseButton1Click:Connect(function()
---while wait(1) do
-  findtarget2()
---end
-end)
+  for i, v in ipairs(plrs) do
+    wait()
+    local plrschr = v.Character
+    local plrchr = plr.Character
+    if v.Character ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and plrchr ~= nil and plrchr:FindFirstChild("HumanoidRootPart") ~= nil and v ~= plr and plrchr.Humanoid.Health ~= 0 then
+      if v.Character:FindFirstChild("HumanoidRootPart") ~= nil and (v.Character.HumanoidRootPart.Position - plrchr.HumanoidRootPart.Position).magnitude < distance and v.Character.Humanoid.Health ~= 0 and v.Team ~= plr.Team and table.concat(avoid,"") ~= v.DisplayName and table.concat(avoid,"") ~= v.Name then
+        local detectplrs = Ray.new(plrchr.HumanoidRootPart.Position, (v.Character.HumanoidRootPart.Position - plrchr.HumanoidRootPart.Position).Unit * distance)
+        local hit, position = game.workspace:FindPartOnRayWithIgnoreList(detectplrs, {plrchr})
+        
+        if v.Character:FindFirstChild("HumanoidRootPart") and hit == v.Character.HumanoidRootPart then
+          if plr.Backpack:FindFirstChild("Sniper") ~= nil then
+            plr.Backpack.Sniper.Parent = plrchr
+            local args = {
+    [1] = Vector3.new(v.Character.HumanoidRootPart.Position.X,v.Character.HumanoidRootPart.Position.Y,v.Character.HumanoidRootPart.Position.Z),
+    [2] = "Sniper",
+    [3] = game:GetService("Players").LocalPlayer.Character.Sniper }
+game:GetService("ReplicatedStorage").Events.Remote.ShotTarget:FireServer(unpack(args))
+          end -- else
+            if plrchr:FindFirstChild("Sniper") then
+            local args = {
+    [1] = Vector3.new(v.Character.HumanoidRootPart.Position.X,v.Character.HumanoidRootPart.Position.Y,v.Character.HumanoidRootPart.Position.Z),
+    [2] = "Sniper",
+    [3] = game:GetService("Players").LocalPlayer.Character.Sniper }
+game:GetService("ReplicatedStorage").Events.Remote.ShotTarget:FireServer(unpack(args))
+          end -- is the sniper in the backpack?
+     --[[   else
+          wait(cooldown)
+          if plrchr.Sniper ~= nil then
+          plrchr.Sniper.Parent = plr.Backpack
+          end]]
+        end -- on hit
+      end -- radius
+    else
+      print("couldnt find players")
+    end -- if plr and plrs exist
+  end -- for i loop
+  
+end -- while loop
+  
