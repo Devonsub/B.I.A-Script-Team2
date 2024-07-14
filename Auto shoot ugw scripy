@@ -52,7 +52,7 @@ while wait() do
         local detectplrs = Ray.new(plrchr.HumanoidRootPart.Position, (v.Character.HumanoidRootPart.Position - plrchr.HumanoidRootPart.Position).Unit * distance)
         local hit, position = game.workspace:FindPartOnRayWithIgnoreList(detectplrs, {plrchr})
         
-        if v.Character:FindFirstChild("HumanoidRootPart") and hit == v.Character.HumanoidRootPart then
+        if v.Character:FindFirstChild("HumanoidRootPart") and table.concat(avoid,"") ~= v.DisplayName and table.concat(avoid,"") ~= v.Name and hit == v.Character.HumanoidRootPart then
           if plr.Backpack:FindFirstChild("Sniper") ~= nil then
             plr.Backpack.Sniper.Parent = plrchr
             local args = {
