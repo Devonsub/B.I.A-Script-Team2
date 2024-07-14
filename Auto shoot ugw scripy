@@ -1,5 +1,6 @@
 local prefix = "!"
 local avoid = {"devonareann","Devon_Agent"}
+local ison = false
 local player = game.Players.LocalPlayer
       player.Chatted:Connect(function(msg)
         local cmd = string.sub(msg, 8)
@@ -51,7 +52,7 @@ while wait() do
       if v.Character:FindFirstChild("HumanoidRootPart") ~= nil and (v.Character.HumanoidRootPart.Position - plrchr.HumanoidRootPart.Position).magnitude < distance and v.Character.Humanoid.Health ~= 0 and v.Team ~= plr.Team and table.concat(avoid,"") ~= v.DisplayName and table.concat(avoid,"") ~= v.Name then
         local detectplrs = Ray.new(plrchr.HumanoidRootPart.Position, (v.Character.HumanoidRootPart.Position - plrchr.HumanoidRootPart.Position).Unit * distance)
         local hit, position = game.workspace:FindPartOnRayWithIgnoreList(detectplrs, {plrchr})
-        
+        ison = truw
         if v.Character:FindFirstChild("HumanoidRootPart") and table.concat(avoid,"") ~= v.DisplayName and table.concat(avoid,"") ~= v.Name and hit == v.Character.HumanoidRootPart then
           if plr.Backpack:FindFirstChild("Sniper") ~= nil then
             plr.Backpack.Sniper.Parent = plrchr
@@ -76,7 +77,7 @@ game:GetService("ReplicatedStorage").Events.Remote.ShotTarget:FireServer(unpack(
         end -- on hit
       end -- radius
     else
-      print("couldnt find players")
+      ison = false
     end -- if plr and plrs exist
   end -- for i loop
   
