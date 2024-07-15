@@ -1,11 +1,11 @@
 --[[ Admin script for ugw, Made by devon ]]
 
 print("Command executed")
-print("Commands: heal,autoheal,heal teammates,detect,checkprint,spin,reset,power,sit,disable anticheat,jumppower,teamred,teamblue,autogoto flagholder,autodig")
-print("Undo Commands: unautoheal, undetect, unspin, unautogoto, unautodig, stop all")
+print("Commands: prefix, allow, heal, autoheal, heal teammates, detect, checkprint, spin,reset, power, sit, disable anticheat, jumppower, teamred, teamblue, autogoto flagholder, autodig")
+print("Undo Commands: remove, unautoheal, undetect, unspin, unautogoto, unautodig, stop all")
 local plr = game.Players.LocalPlayer
---while wait() do
-  local perms = {"devonareann"}
+--while wait()
+perms = {"Noone"}
   local plrs = game.Players:GetPlayers()
 local prefix_selection = {"!" , "?" , ";" , "+" , "*" , "/" , "#", "-", "_", "@", ".", ",", ">"}
 plr.Character.Humanoid.Sit = false
@@ -35,6 +35,8 @@ username = nil
           
           local chr = plr.Character
           local hum = chr.Humanoid
+          local allow = string.sub(msg, 8)
+          local remove = string.sub(msg, 9)
           local rootpart = chr.HumanoidRootPart
           local cmd = string.sub(msg, 9, 9)
           local heal = string.sub(msg, 7)
@@ -47,10 +49,29 @@ username = nil
           local hipheight = string.sub(msg, 12)
           local hh = string.sub(msg, 5)
           
+          if msg == prefix.."remove "..remove then
+          if perms[table.find(perms, remove)] then
+            table.remove(avoid, perms[table.find(perms, remove)])
+            print("Player", remove, " has been removed from the table")
+          else
+            print("Player doesn't exist")
+          end
+        end
+          
+          if msg == prefix.."allow "..allow then
+          if perms[table.find(perms, allow)] then
+            print("This player is already added")
+          else
+            table.insert(perms, allow)
+            print("Player", allow, " has been added to the table")
+            wait()
+            print(perms[table.find(perms, allow)])
+          end
+        end
           
           --------------LOADSTRINGS--------------
           if msg == prefix.."disable anticheat" then
-            loadstring(game:HttpGet(('https://raw.githubusercontent.com/Devonsub/B.I.A-Script-Team2/main/Anticheat%20removal%20for%20ugw'),true))()
+            loadstring(game:HttpGet('https://raw.githubusercontent.com/Devonsub/B.I.A-Script-Team2/main/Anticheat%20removal%20for%20ugw'))()
             print("Anti cheat disabled")
           end
           
