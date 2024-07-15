@@ -2,7 +2,7 @@
 
 print("Command executed")
 print("Commands: heal,autoheal,heal teammates,detect,checkprint,spin,reset,power,sit,disable anticheat,jumppower,teamred,teamblue,autogoto flagholder,autodig")
-print("Undo Commands: unautoheal, undetect, unspin, unautogoto, unautodig, stop all"
+print("Undo Commands: unautoheal, undetect, unspin, unautogoto, unautodig, stop all")
 local plr = game.Players.LocalPlayer
 --while wait() do
   local perms = {"devonareann"}
