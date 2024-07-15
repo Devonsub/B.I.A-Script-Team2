@@ -1,0 +1,370 @@
+--[[ Admin script for ugw, Made by devon ]]
+
+print("Command executed")
+print("Commands: heal,autoheal,heal teammates,detect,checkprint,spin,reset,power,sit,disable anticheat,jumppower,teamred,teamblue,autogoto flagholder,autodig")
+print("Undo Commands: unautoheal, undetect, unspin, unautogoto, unautodig, stop all"
+local plr = game.Players.LocalPlayer
+--while wait() do
+  local perms = {"devonareann"}
+  local plrs = game.Players:GetPlayers()
+local prefix_selection = {"!" , "?" , ";" , "+" , "*" , "/" , "#", "-", "_", "@", ".", ",", ">"}
+plr.Character.Humanoid.Sit = false
+prefix = "!"
+hitbox = Vector3.new(20,2,20)
+velocity = 0
+speed = 15
+hiph = 0.5
+radius = 0
+looptimes = 2
+autodig = "false"
+flaguser = "false"
+onhealing = "false"
+canspin = "off"
+cooldown = "false"
+loop = "off"
+spinloop = 0
+--weaks = 0
+username = nil
+
+  for i, v in pairs(plrs) do
+    wait()
+   -- for i, v in pairs(perms) do
+      
+      if plr.Name == v.Name or table.concat(perms,"") == v.Name then
+        v.Chatted:Connect(function(msg)
+          
+          local chr = plr.Character
+          local hum = chr.Humanoid
+          local rootpart = chr.HumanoidRootPart
+          local cmd = string.sub(msg, 9, 9)
+          local heal = string.sub(msg, 7)
+          local healweak = string.sub(msg, 10)
+          local jumppower = string.sub(msg, 12)
+          local autohealing = string.sub(msg, 11)
+          local spincmd = string.sub(msg, 7)
+          local speedcmd = string.sub(msg, 11)
+          local speedcmd2 = string.sub(msg, 8)
+          local hipheight = string.sub(msg, 12)
+          local hh = string.sub(msg, 5)
+          
+          
+          --------------LOADSTRINGS--------------
+          if msg == prefix.."disable anticheat" then
+            loadstring(game:HttpGet(('https://raw.githubusercontent.com/Devonsub/B.I.A-Script-Team2/main/Anticheat%20removal%20for%20ugw'),true))()
+            print("Anti cheat disabled")
+          end
+          
+          --------------FUNCTIONS----------------
+          local function onspin() -- Spin Command
+             
+            if msg == prefix.."stop all" then
+              autodig = "false"
+              flaguser = "false"
+              onhealing = "false"
+              canspin = "off"
+              cooldown = "false"
+              loop = "off"
+          end
+            
+            repeat
+              if msg == prefix.."unspin" then
+            print("Spinning disabled")
+              --spinloop = 0
+            canspin = "off"
+              rootpart.CFrame = rootpart.CFrame * CFrame.Angles(0,math.rad(0),0)
+                break
+          end
+            if chr ~= nil and rootpart ~= nil and canspin == "on" then
+                wait()
+                rootpart.CFrame = rootpart.CFrame * CFrame.Angles(0,math.rad(velocity),0)
+            else
+              break
+              
+              end
+            until canspin == "off"
+               
+          end
+          
+          local function automining() --auto mining / digging
+            repeat
+              wait()
+  local plr = game.Players.LocalPlayer
+  local plrchr = plr.Character
+  local dirts = game.Workspace.Dirts:GetDescendants()
+  local distance = 10
+  if msg == prefix.."unautodig" then
+    print("Auto digging is now disabled")
+    autodig = "false"
+    break
+  end
+  for i, models in ipairs(dirts) do
+    
+    if plrchr:FindFirstChild("HumanoidRootPart") ~= nil and models:FindFirstChildOfClass("Part") and autodig == "true" then
+      local block = models:FindFirstChildOfClass("Part")
+    local detectblocks = Ray.new(plrchr.HumanoidRootPart.Position, (block.Position - plrchr.HumanoidRootPart.Position).Unit * distance)
+    local hit, position = game.workspace:FindPartOnRayWithIgnoreList(detectblocks, {plrchr})
+    if hit == block then
+      if plrchr:FindFirstChild("Shovel") ~= nil then
+        local dirt = block.Parent
+        if dirt ~= nil and plrchr:FindFirstChild("Shovel") ~= nil then
+        local args = {
+          [1] = dirt,
+          [2] = game:GetService("Players").LocalPlayer.Character.Shovel.DigTrigger}
+        game:GetService("ReplicatedStorage").Events.Remote.Dig:FireServer(unpack(args))
+        else
+          warn()
+        end
+       -- end
+      else
+        print("Couldn't find shovel")
+        plr.Backpack.Shovel.Parent = plrchr
+      end -- find shovel
+    end -- on hit
+    -- end
+    end -- find root part
+  end-- for i loop
+            until autodig == "false"
+--end -- while loop 
+          end --Auto mining / Digging
+          
+          local function flagdetection()
+            repeat
+            local flag = "FlagAccessory"
+            local players = game.Players:GetPlayers()
+            for i, p in pairs(players) do
+              
+              if msg == prefix.."unautogoto flagholder" then
+            print("Stopped teleporting to flag holder")
+            flaguser = "false"
+                break
+          end
+              if p.Character:FindFirstChild("HumanoidRootPart") ~= nil and p.Character ~= nil and p.Team ~= plr.Team and p.Character:FindFirstChild(flag) and flaguser == "true" then
+                rootpart.CFrame = p.Character.HumanoidRootPart.CFrame + p.Character.HumanoidRootPart.CFrame.LookVector * -4
+             -- else
+               -- flaguser = "false"
+             --   break
+              end
+              wait()
+            end
+            until msg == prefix.."unautogoto flagholder"
+          end -- flag user detection
+          
+          local function healingweaks()
+            local players = game.Players:GetPlayers()
+            canhealagain = "yes"
+            --local cooldown = 5
+            local hp = 100
+            for i, p in pairs(players) do
+              for i = 1,9 do
+                if p.Character:FindFirstChild("HumanoidRootPart") and p.Name ~= plr.Name and p.Team == plr.Team and p.Character ~= nil and p.Character.Humanoid.Health ~= 0 and chr ~= nil then
+                  chr.HumanoidRootPart.CFrame = p.Character.HumanoidRootPart.CFrame
+                end
+                if canhealagain == "yes" then
+                  canhealagain = "no"
+                  game:GetService("ReplicatedStorage").Events.Remote.PlayerUseMedkit:FireServer()
+                end
+                wait()
+              end
+              wait() -- looping through
+              end
+          end
+          
+          local function autoheal() -- Auto Heal Command
+            repeat 
+              local players = game.Players:GetPlayers()
+              local c = plr.Character
+            local hp = 100
+              wait()
+              if msg == prefix.."unautoheal" then
+            wait()
+            username = nil
+            loop = "off"
+            cooldown = "false"
+                break
+          end
+            for i, p in pairs(players) do
+              
+              wait()
+              if loop == "on" then
+            if p.DisplayName == username and cooldown == "true" then
+              if chr ~= nil and p.Character ~= nil and p.Character.Humanoid.Health ~= 0 and p.Team == plr.Team and c.HumanoidRootPart ~= nil then -->
+                wait(0.1)
+                cooldown = "false"
+                c.HumanoidRootPart.CFrame = p.Character.HumanoidRootPart.CFrame
+              wait()
+                c.HumanoidRootPart.CFrame = p.Character.HumanoidRootPart.CFrame
+              game:GetService("ReplicatedStorage").Events.Remote.PlayerUseMedkit:FireServer()
+                  wait(5)
+                  plr.Character.Humanoid.Health = 0
+                wait(5)
+                --if plr.Character.Humanoid.Health ~= 0 then
+                  cooldown = "true"
+              --end
+              end
+           -- else 
+              --break
+            end --
+              
+              if p.Name == username and cooldown == "true" then
+              if chr ~= nil and p.Character ~= nil and p.Character.Humanoid.Health ~= hp and p.Team == plr.Team and chr.HumanoidRootPart ~= nil  then -->
+                cooldown = "false"
+                chr.HumanoidRootPart.CFrame = p.Character.HumanoidRootPart.CFrame
+              wait()
+              game:GetService("ReplicatedStorage").Events.Remote.PlayerUseMedkit:FireServer()
+                  wait(5)
+                  plr.Character.Humanoid.Health = 0
+                wait(5)
+               -- if plr.Character.Humanoid.Health ~= 0 then
+                  cooldown = "true"
+             -- end
+              end
+            end 
+           
+              else
+                break
+            end
+            end -- for i loop
+            until msg == prefix.."unautoheal"
+          end -- Auto Heal Command
+          
+           ----------------------Commands----------------------
+          
+          if msg == prefix.."heal "..heal then
+            local players = game.Players:GetPlayers()
+            local cooldown = 5
+            name = heal
+            for i, p in pairs(players) do
+              wait()
+            if p.DisplayName == name or p.Name == name then
+                chr.HumanoidRootPart.CFrame = p.Character.HumanoidRootPart.CFrame
+              wait()
+              game:GetService("ReplicatedStorage").Events.Remote.PlayerUseMedkit:FireServer()
+              wait(cooldown)
+              plr.Character.Humanoid.Health = 0
+          --else
+         --   print("couldn't find", name)
+            end
+          end
+          end
+          
+          if msg == prefix.."unautogoto" then
+            print("Stopped teleporting to flag holder")
+            flaguser = "false"
+          end
+          if msg == prefix.."autogoto flagholder" then
+            print("teleporting to flag user")
+            flaguser = "true"
+              flagdetection()
+          end
+          if msg == prefix.."unautodig" then
+             print("Auto digging is now disabled")
+             autodig = "false"
+           end
+          if msg == prefix.."autodig" then
+            print("Auto digging enabled")
+            autodig = "true"
+              automining()
+          end
+          if msg == prefix.."sit" then
+              plr.Character.Humanoid.Sit = true
+          end
+          if msg == prefix.."jumppower "..jumppower then
+              plr.Character.Humanoid.JumpPower = jumppower
+          end
+          if msg == prefix.."speed me"..speedcmd then
+              plr.Character.Humanoid.WalkSpeed = speedcmd
+          end
+          if msg == prefix.."speed "..speedcmd2 then
+              plr.Character.Humanoid.WalkSpeed = speedcmd2
+          end
+            if msg == prefix.."heal me" then
+              game:GetService("ReplicatedStorage").Events.Remote.PlayerUseMedkit:FireServer()
+            end
+          if msg == prefix.."heal teammates" then
+            print("healing teammates")
+            weaks = healweak
+              healingweaks()
+            end
+          if msg == prefix.."unautoheal" then
+            --for i = 1,2 do
+            print("auto healing is disabled")
+            username = nil
+            loop = "off"
+            cooldown = "false"
+           -- end
+          end
+          if msg == prefix.."autoheal "..autohealing then
+            print("Auto healing:",autohealing)
+            username = autohealing
+            loop = "on"
+            cooldown = "true"
+            autoheal()
+          end
+          
+          if msg == prefix.."reset" then
+            plr.Character.Humanoid.Health = 0
+          end
+              
+          if msg == prefix.."unspin" then
+            print("Spinning disabled")
+              --spinloop = 0
+            canspin = "off"
+              rootpart.CFrame = rootpart.CFrame * CFrame.Angles(0,math.rad(0),0)
+          end
+          if msg == prefix.."spin "..spincmd then
+            velocity = spincmd
+            wait()
+            print("spin speed:",velocity)
+            canspin = "on"
+            onspin()
+          end
+          
+          if msg == prefix.."power" then
+            --[[Underground war 2.0 {Aimbot Script}
+Made by Devon_Agent ]]
+            
+            loadstring(game:HttpGet(('https://raw.githubusercontent.com/Devonsub/B.I.A-Script-Team2/main/Aimbot%20for%20ugw%202.0'),true))()
+            print("Aimbot script loaded")
+          end
+          
+          
+          
+          if msg == prefix.."teamblue" then
+            print("Changing to blue team")
+--[[ Change teams ]]
+local args = {
+    [1] = "Blue"
+}
+
+game:GetService("ReplicatedStorage").Events.Remote.PlayPressed:InvokeServer(unpack(args))
+          end
+          
+          if msg == prefix.."teamred" then
+            print("changing to red team")
+--[[ Change teams ]]
+local args = {
+    [1] = "Red"
+}
+
+game:GetService("ReplicatedStorage").Events.Remote.PlayPressed:InvokeServer(unpack(args))
+          end
+         -- print(table.find(prefix_selection,cmd))
+         -- print("table: ",prefix_selection[table.find(prefix_selection,cmd)])
+         --[[ if msg == prefix.."prefix "..prefix_selection[table.find(prefix_selection,cmd)] then
+            wait()
+            prefix = cmd
+            print("Prefix is now:",cmd)
+            else
+              --print("Invalid Prefix", "     Options are: ! , ? , ; , + , * , / , # , - , _ , @ , (.) , (,) , >")
+          end]]
+          
+          if msg == prefix.."detect" or msg == prefix.."dct" then
+            wait()
+            print("it worked")
+          end
+          
+        end)
+      end
+   -- end
+  end
+--end 
