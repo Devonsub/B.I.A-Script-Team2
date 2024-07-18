@@ -1,0 +1,83 @@
+local prefix = "!"
+
+print("Script executed")
+while wait() do
+  
+  avoid = {"devonareann","Devon_Agent"}
+local ison = false
+local player = game.Players.LocalPlayer
+      player.Chatted:Connect(function(msg)
+        local cmd = string.sub(msg, 8)
+        local uncmd = string.sub(msg, 10)
+        local radi = string.sub(msg, 9)
+        if msg == prefix.."avoid "..cmd then
+          
+          if avoid[table.find(avoid, cmd)] then
+            print("This player is already added")
+          else
+            table.insert(avoid, cmd)
+            print("Player", cmd, " has been added to the table")
+            wait()
+            print(avoid[table.find(avoid, cmd)])
+          end
+        end
+        
+        if msg == prefix.."unavoid "..uncmd then
+          if avoid[table.find(avoid, uncmd)] then
+            table.remove(avoid, avoid[table.find(avoid, uncmd)])
+            print("Player", uncmd, " has been removed from the table")
+          else
+            print("Player doesn't exist")
+          end
+        end
+        
+        if msg == prefix.."checkprint" then
+          print("Avoiding: ",table.concat(avoid, ""))
+          print("Prefix: ", prefix)
+        end
+        
+        --[[if msg == prefix.."radius "..radi then
+          distance = radi
+        end]]
+      end)
+  
+  local plr = game.Players.LocalPlayer
+  local plrs = game.Players:GetPlayers()
+  local item = {"Sniper"}
+  local distance = 800
+  local cooldown = 5
+  
+  for i, v in ipairs(plrs) do
+    wait()
+    local plrschr = v.Character
+    local plrchr = plr.Character
+    if v.Character ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and table.concat(avoid,"") ~= v.DisplayName and table.concat(avoid,"") ~= v.Name and plrchr ~= nil and plrchr:FindFirstChild("HumanoidRootPart") ~= nil and v ~= plr and plrchr.Humanoid.Health ~= 0 then
+      if v.Character:FindFirstChild("HumanoidRootPart") ~= nil and (v.Character.HumanoidRootPart.Position - plrchr.HumanoidRootPart.Position).magnitude < distance and v.Character.Humanoid.Health ~= 0 and v.Team ~= plr.Team and table.concat(avoid,"") ~= v.DisplayName and table.concat(avoid,"") ~= v.Name then
+        local detectplrs = Ray.new(plrchr.HumanoidRootPart.Position, (v.Character.HumanoidRootPart.Position - plrchr.HumanoidRootPart.Position).Unit * distance)
+        local hit, position = game.workspace:FindPartOnRayWithIgnoreList(detectplrs, {plrchr})
+        ison = true
+        if v.Character:FindFirstChild("HumanoidRootPart") and table.concat(avoid,"") ~= v.DisplayName and table.concat(avoid,"") ~= v.Name and hit == v.Character.HumanoidRootPart then
+          if plr.Backpack:FindFirstChild("Sniper") ~= nil then
+            plr.Backpack.Sniper.Parent = plrchr
+            local args = {
+    [1] = Vector3.new(v.Character.HumanoidRootPart.Position.X,v.Character.HumanoidRootPart.Position.Y,v.Character.HumanoidRootPart.Position.Z),
+    [2] = "Sniper",
+    [3] = game:GetService("Players").LocalPlayer.Character.Sniper }
+game:GetService("ReplicatedStorage").Events.Remote.ShotTarget:FireServer(unpack(args))
+          end -- else
+            if plrchr:FindFirstChild("Sniper") then
+            local args = {
+    [1] = Vector3.new(v.Character.HumanoidRootPart.Position.X,v.Character.HumanoidRootPart.Position.Y,v.Character.HumanoidRootPart.Position.Z),
+    [2] = "Sniper",
+    [3] = game:GetService("Players").LocalPlayer.Character.Sniper }
+game:GetService("ReplicatedStorage").Events.Remote.ShotTarget:FireServer(unpack(args))
+          end -- is the sniper in the backpack?
+        end -- on hit
+      end -- radius
+    else
+      ison = false
+    end -- if plr and plrs exist
+  end -- for i loop
+  
+end -- while loop
+  
