@@ -418,6 +418,7 @@ function ToggleNoclip()
         end
     end
 end
+--[[
 function automining() --auto mining / digging
             repeat
               wait()
@@ -449,4 +450,4 @@ function automining() --auto mining / digging
     end -- find root part
   end-- for i loop
             until autodig == "false"
-end
+end]]
