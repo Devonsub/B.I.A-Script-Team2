@@ -1,0 +1,452 @@
+-- New admin script, made by devonareann
+-- enjoy
+wait()
+print("Script executed")
+cmds = "sit, jump, reset, cmds, spin, jumppower, heal, autoheal, tp me, noclip, teamblue, teamred, rotate"
+
+local player = game:GetService("Players").LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local coregui = game:GetService("StarterGui")
+prefix = "!"
+local prefix_selection = {"!","?","/",";",":","*","'","%","+","-","&","_","$","#","@","^","<",">",".","~"}
+local velocity = {0,0,0,0} -- [1]: Spin 
+local speed = {0,0,0,0}
+local dead = 0
+coregui:SetCore("SendNotification", {
+  Title = "Ugw Admin V1.2",
+  Text = "made by devonarenn",
+  Icon = "rbxassetid://12134562017"
+})
+wait()
+
+spinenabled = "false"
+healuser = "username" -- Username or Display Name
+tpuser = "username"
+flagenabled = "false"
+healenabled = "false"
+autolungeenabled = "false"
+canlunge = "false"
+Clipon = "false"
+autodig = "false"
+message = "nothing"
+player.Chatted:Connect(function(msg)
+  print("chatted")
+  local humanoid = char:FindFirstChildWhichIsA("Humanoid")
+  local prefixcmd = string.sub(msg, 9, 9)
+  local jumppowercmd = string.sub(msg, 12)
+  local hipheightcmd = string.sub(msg, 12)
+  local speedcmd = string.sub(msg, 11)
+  local autohealcmd = string.sub(msg, 11)
+  local speedcmd2 = string.sub(msg, 8)
+  local tpcmd = string.sub(msg, 8)
+  local spincmd = string.sub(msg, 7)
+  local healcmd = string.sub(msg, 7)
+  local hhcmd = string.sub(msg, 5)
+  
+  ----------Simple Commands----------
+  if msg == prefix.."sit" then
+    humanoid.Sit = true
+    coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Running Command"})
+  end
+  if msg == prefix.."rotate" then
+    local rootpart = char.HumanoidRootPart
+    coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Running Command"})
+    rootpart.CFrame = rootpart.CFrame * CFrame.Angles(math.rad(90),0,0)
+  end
+  if msg == prefix.."jump" then
+    coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Running Command"})
+    humanoid.Jump = true
+  end
+  if msg == prefix.."reset" then
+    humanoid.Health = 0
+    coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Running Command"})
+  elseif msg == prefix.."die" then
+    humanoid.Health = 0
+  end
+  if msg == prefix.."cmds" then
+    coregui:SetCore("SendNotification", {
+  Title = "Cmds:",
+  Text = cmds,
+  Duration = 10})
+    --print(table.concat(cmds,""))
+  end
+  if msg == prefix.."lunge" then
+    canlunge = "true"
+    Lunge()
+  end
+  if msg == prefix.."noclip" then
+    Clipon = "true"
+    coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Noclip enabled"})
+    ToggleNoclip()
+  elseif msg == prefix.."clip" then
+    coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Noclip disabled"})
+    Clipon = "false"
+  elseif msg == prefix.."unnoclip" then
+  coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Noclip disabled"})
+    Clipon = "false"
+  end
+  if msg == prefix.."teamblue" then
+    coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Changing to blue team"})
+    --[[ Change teams]]
+    local args = {
+    [1] = "Blue"}
+    game:GetService("ReplicatedStorage").Events.Remote.PlayPressed:InvokeServer(unpack(args))
+  end
+  if msg == prefix.."teamred" then
+    coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Changing to red team"})
+--[[ Change teams ]]
+    local args = {
+    [1] = "Red"}
+    game:GetService("ReplicatedStorage").Events.Remote.PlayPressed:InvokeServer(unpack(args))
+  end
+  if msg == prefix.."autodig" then
+    autodig = "true"
+    automining()
+  elseif msg == prefix.."unautodig" then
+    autodig = "false"
+  end
+  ----------Number Values----------
+  if msg == prefix.."speed me "..speedcmd then
+    humanoid.WalkSpeed = speedcmd
+    coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Running Command"})
+  elseif msg == prefix.."speed "..speedcmd2 then
+    humanoid.WalkSpeed = speedcmd2
+    coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Running Command"})
+  end
+  if msg == prefix.."spin "..spincmd then
+    velocity[1] = spincmd
+    spinenabled = "true"
+    coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Running Command"})
+    onspin()
+  elseif msg == prefix.."unspin" then
+    local rootpart = char.HumanoidRootPart
+    velocity[1] = 0
+    spinenabled = "false"
+    rootpart.CFrame = rootpart.CFrame * CFrame.Angles(0,math.rad(0),0)
+  end
+  if msg == prefix.."jumppower "..jumppowercmd then
+   coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Running Command"})
+    humanoid.JumpPower = jumppowercmd
+  end
+  if msg == prefix.."hipheight "..hipheightcmd then
+    humanoid.HipHeight = hipheightcmd
+  elseif msg == prefix.."hh "..hhcmd then
+    humanoid.HipHeight = hhcmd
+  end
+  ----------Players, Player Or Others----------
+  if msg == prefix.."heal "..healcmd then
+    coregui:SetCore("SendNotification", {
+      Title = "Stats:",
+      Text = "healing"})
+    healuser = healcmd
+    onheal()
+  end
+  if msg == prefix.."autoheal "..autohealcmd then
+    print("Auto Healing:",autohealcmd)
+    healenabled = "true"
+    healuser = autohealcmd
+    onautohealing()
+  elseif msg == prefix.."unautoheal" then
+    print("unauto Healing:",healuser)
+    healenabled = "false"
+  end
+  if msg == prefix.."tp me "..tpcmd then
+    coregui:SetCore("SendNotification", {
+  Title = "Stats:",
+  Text = "Running Command"})
+    tpuser = tpcmd
+    ontp()
+  end
+  
+  if msg == prefix.."autogoto flagholder" then
+    print("teleporting to flag holder")
+    flagenabled = "true"
+    canlunge = "true"
+    flagdetection()
+  elseif msg == prefix.."unautogoto" then
+    print("Stopped teleporting to flag holder")
+    canlunge = "false"
+    flagenabled = "false"
+  end
+end)
+
+
+----------Functions----------
+function Lunge()
+  repeat
+    wait()
+  local Player = game.Players.LocalPlayer
+  local Chr = Player.Character or Player.CharacterAdded:Wait()
+  local Humanoid = Chr.Humanoid
+    if canlunge == "false" then
+      break
+    end
+  if Chr:FindFirstChild("Sword") ~= nil and canlunge == "true" then
+    local Tool = game.Players.LocalPlayer.Character.Sword
+    local Handle = Tool:FindFirstChild("Handle")
+    Sounds = {
+      Lunge = Handle:FindFirstChild("Lunge"),
+}
+    Grips = {
+      Up = CFrame.new(0, 0, -1.70000005, 0, 0, 1, 1, 0, 0, 0, 1, 0),
+      Out = CFrame.new(0, 0, -1.70000005, 0, 1, 0, 1, -0, 0, 0, 0, -1)
+}
+	Sounds.Lunge:Play()
+	if Humanoid then
+		if Humanoid.RigType == Enum.HumanoidRigType.R6 then
+			local Anim = Instance.new("StringValue")
+			Anim.Name = "toolanim"
+			Anim.Value = "Lunge"
+			Anim.Parent = Tool
+		elseif Humanoid.RigType == Enum.HumanoidRigType.R15 then
+			local Anim = Tool:FindFirstChild("R15Lunge")
+			if Anim then
+				local Track = Humanoid:LoadAnimation(Anim)
+				Track:Play(0)
+			end
+		end
+	end	
+  wait(0.2)
+	Tool.Grip = Grips.Out
+	wait(0.6)
+	Tool.Grip = Grips.Up
+  end
+    until canlunge == "false"
+end
+
+function flagdetection()
+  repeat
+    local flag = "FlagAccessory"
+    plrs = game:GetService("Players"):GetPlayers()
+    plr = player
+    chr = char
+    user = healuser
+    for i, p in pairs(plrs) do
+      if p.Character:FindFirstChild("HumanoidRootPart") ~= nil and p.Character ~= nil and p.Team ~= plr.Team and p.Character:FindFirstChild(flag) and flagenabled == "true" then
+        local rootpart = chr.HumanoidRootPart
+        wait()
+        if chr:FindFirstChild("Sword") == nil then
+          plr.Backpack.Sword.Parent = chr
+        else
+          Lunge()
+        end
+        rootpart.CFrame = p.Character.HumanoidRootPart.CFrame + p.Character.HumanoidRootPart.CFrame.LookVector * -4
+      end
+    end
+  until flagenabled == "false"
+end -- flag user detection
+
+function onspin()
+  repeat
+    wait()
+    plr = player
+    chr = char
+    if spinenabled == "true" and char:FindFirstChild("HumanoidRootPart") ~= nil then
+      local rootpart = chr.HumanoidRootPart
+      rootpart.CFrame = rootpart.CFrame * CFrame.Angles(0,math.rad(velocity[1]),0)
+    else
+      print("Spinning disabled")
+      rootpart.CFrame = rootpart.CFrame * CFrame.Angles(0,math.rad(0),0)
+      spinenabled = "false"
+      break
+    end
+  until spinenabled == "false"
+end
+
+function onheal()
+    wait()
+    plrs = game:GetService("Players"):GetPlayers()
+    plr = player
+    chr = char
+    user = healuser
+  cooldown = 5
+  local rootpart = chr.HumanoidRootPart
+    for i, p in pairs(plrs) do
+      
+      local plrschr = p.Character or p.CharacterAdded:Wait()
+      if string.find(p.Name, user) then
+        user = p.Name
+        print(user)
+        if plrschr:FindFirstChild("HumanoidRootPart") ~= nil and chr:FindFirstChild("HumanoidRootPart") ~= nil and p.Name == user and plr.Name ~= user and plrschr.Humanoid.Health ~= dead then
+        print("healing:",user, "Username")
+        rootpart.CFrame = plrschr.HumanoidRootPart.CFrame
+        game:GetService("ReplicatedStorage").Events.Remote.PlayerUseMedkit:FireServer()
+        wait(cooldown)
+          if chr.Humanoid then
+            chr.Humanoid.Health = dead
+          end
+        end
+      elseif string.find(p.DisplayName, user) then
+        user = p.DisplayName
+        print(user)
+        if plrschr:FindFirstChild("HumanoidRootPart") ~= nil and chr:FindFirstChild("HumanoidRootPart") ~= nil and p.DisplayName == user and plr.DisplayName ~= user and plrschr.Humanoid.Health ~= dead then
+        print("healing:",user, "DisplayName")
+        rootpart.CFrame = plrschr.HumanoidRootPart.CFrame
+        game:GetService("ReplicatedStorage").Events.Remote.PlayerUseMedkit:FireServer()
+        wait(cooldown)
+          if chr.Humanoid then
+            chr.Humanoid.Health = dead
+          end
+        end
+      end
+    end
+end
+
+function onautohealing()
+  canheal = "true"
+  repeat
+    wait()
+    plrs = game:GetService("Players"):GetPlayers()
+    plr = player
+    chr = char
+    user = autohealcmd
+    cooldown = 5
+    
+    for i, p in pairs(plrs) do
+      local plrschr = p.Character or p.CharacterAdded:Wait()
+      if plrschr:FindFirstChild("HumanoidRootPart") ~= nil and chr:FindFirstChild("HumanoidRootPart") ~= nil and p.DisplayName == user and plrschr.Humanoid.Health ~= dead and healenabled == "true" and canheal == "true" then
+        local rootpart = chr.HumanoidRootPart
+        canheal = "false"
+        rootpart.CFrame = plrschr.HumanoidRootPart.CFrame
+        game:GetService("ReplicatedStorage").Events.Remote.PlayerUseMedkit:FireServer()
+        wait(cooldown)
+        canheal = "true"
+        if chr.Humanoid then
+        chr.Humanoid.Health = dead
+        end
+      elseif plrschr:FindFirstChild("HumanoidRootPart") ~= nil and chr:FindFirstChild("HumanoidRootPart") ~= nil and p.Name == user and plrschr.Humanoid.Health ~= dead and healenabled == "true" and canheal == "true" then
+        canheal = "false"
+        rootpart.CFrame = plrschr.HumanoidRootPart.CFrame
+        game:GetService("ReplicatedStorage").Events.Remote.PlayerUseMedkit:FireServer()
+        wait(cooldown)
+        canheal = "true"
+        if chr.Humanoid then
+        chr.Humanoid.Health = dead
+        end
+      else
+        wait()
+        --  warn(plrschr:FindFirstChild("HumanoidRootPart"),chr:FindFirstChild("HumanoidRootPart"))
+      end
+    end
+  until healenabled == "false"
+end
+
+function ontp()
+  wait()
+  plrs = game:GetService("Players"):GetPlayers()
+  plr = player
+  chr = char
+  user = tpuser
+  local rootpart = chr.HumanoidRootPart
+  for i, p in pairs(plrs) do
+    local plrschr = p.Character or p.CharacterAdded:Wait()
+   -- for l = 1,i do
+   if string.find(p.Name, user) then
+      user = p.Name
+      print(user)
+      if plrschr:FindFirstChild("HumanoidRootPart") ~= nil and chr:FindFirstChild("HumanoidRootPart") ~= nil and p.Name == user and plr.Name ~= user then
+        print("tped to:",user, "Username")
+        rootpart.CFrame = plrschr.HumanoidRootPart.CFrame
+        wait()
+        user = nil
+      end
+      --[[print("Couldn't find user",user)
+      wait()]]
+    elseif string.find(p.DisplayName, user) then
+      user = p.DisplayName
+      print(user)
+      if plrschr:FindFirstChild("HumanoidRootPart") ~= nil and chr:FindFirstChild("HumanoidRootPart") ~= nil and p.DisplayName == user and plr.DisplayName ~= user then
+        print("tped to:",user, "DisplayName")
+        rootpart.CFrame = plrschr.HumanoidRootPart.CFrame
+        wait()
+        user = nil
+      end
+    else
+      print("Couldn't find user",user)
+      wait()
+    end
+  --  end
+  end
+end
+function ToggleNoclip()
+    plr = player
+    if Clipon == "true" then
+        for a, b in pairs(Workspace:GetChildren()) do
+            if b.Name == plr.Name then
+                for i, v in pairs(b:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false
+                    end
+                end
+            end
+        end
+    else
+        for a, b in pairs(Workspace:GetChildren()) do
+            if b.Name == plr.Name then
+                for i, v in pairs(b:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = true
+                    end
+                end
+            end
+        end
+    end
+end
+function automining() --auto mining / digging
+            repeat
+              wait()
+  local plr = game.Players.LocalPlayer
+  local plrchr = plr.Character
+  local dirts = game.Workspace.Dirts:GetDescendants()
+  local distance = 10
+  for i, models in ipairs(dirts) do
+    if plrchr:FindFirstChild("HumanoidRootPart") ~= nil and models:FindFirstChildOfClass("Part") and autodig == "true" then
+      local block = models:FindFirstChildOfClass("Part")
+    local detectblocks = Ray.new(plrchr.HumanoidRootPart.Position, (block.Position - plrchr.HumanoidRootPart.Position).Unit * distance)
+    local hit, position = game.workspace:FindPartOnRayWithIgnoreList(detectblocks, {plrchr})
+    if hit == block then
+      if plrchr:FindFirstChild("Shovel") ~= nil then
+        local dirt = block.Parent
+        if dirt ~= nil and plrchr:FindFirstChild("Shovel") ~= nil then
+        local args = {
+          [1] = dirt,
+          [2] = game:GetService("Players").LocalPlayer.Character.Shovel.DigTrigger}
+        game:GetService("ReplicatedStorage").Events.Remote.Dig:FireServer(unpack(args))
+        else
+          wait()
+        end
+      else
+        wait()
+        plr.Backpack.Shovel.Parent = plrchr
+      end -- find shovel
+    end -- on hit
+    end -- find root part
+  end-- for i loop
+            until autodig == "false"
+end
