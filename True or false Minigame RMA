@@ -62,7 +62,7 @@ local counter = -1 -- 0
 local numberboards = {first = 0,second = 0,third = 0}
 local leaderboard = {first = nil,second = nil,third = nil}
 numberone = 0
-username = ""
+username = "Nil"
 local right = 0
 local wrong = 0
 
@@ -188,7 +188,6 @@ if db == false and answered == true then
 }
 
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
-
   wait(waittime + cooldown)
   trueorfalse()
     end
@@ -235,18 +234,16 @@ print("Not working UGH")
   onerror()
 return
   end
-if messaged == false and cananswer == true then 
- 
+if messaged == false and cananswer == true then
 end
 end
-
 function gameover()
   if counter == limit or counter >= limit then
     if right > numberone then
           numberboards[1] = right
           numberone = right
-          leaderboard[1] = plrs.DisplayName
-          print("1",leaderboard[1],numberboards[1])
+          leaderboard[1] = username
+          print("1",leaderboard[1],numberboards[1]) print("2",leaderboard[2],numberboards[2])
         end
 local args = {
     [1] = "Update",
@@ -255,7 +252,6 @@ local args = {
         ["ImageId"] = 3545
     }
 }
-
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     wait(3)
     if right > wrong then
@@ -266,7 +262,6 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
         ["ImageId"] = 3545
     }
 }
-
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     elseif right == wrong then
       local args = {
@@ -276,9 +271,7 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
         ["ImageId"] = 3545
     }
 }
-
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
-
     elseif wrong > right then
       local args = {
     [1] = "Update",
@@ -287,7 +280,6 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
         ["ImageId"] = 3545
     }
 }
-
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     end
 wait(waittime)
@@ -298,19 +290,17 @@ local args = {
         ["ImageId"] = 3545
     }
 }
-
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     print("You've Gotten    ",right," Rights  ",wrong,"  Wrongs")
     wait(waittime + 1)
     local args = {
     [1] = "Update",
     [2] = {
-        ["DescriptionText"] = "HighScores:          1. "..tostring(leaderboard[1]).." ["..tostring(numberboards[1]).."]",
+        ["DescriptionText"] = "Top Player:          1st. "..tostring(leaderboard[1]).." ["..tostring(numberboards[1]).."]          Your Score: "..right,
         ["ImageId"] = 3545
     }
 }
     game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
-
 wait(8)
 local args = {
     [1] = "Update",
@@ -341,7 +331,7 @@ local args = {
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
-  task.wait(5)
+  task.wait(4)
 for i = 1,loadingtime do
   local args = {
     [1] = "Update",
@@ -368,7 +358,6 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
         ["ImageId"] = 0
     }
 }
-
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
   task.wait(cooldown)
   local args = {
@@ -380,7 +369,6 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
   task.wait(cooldown)
-  
 end
 end
 starting()
@@ -392,13 +380,13 @@ local args = {
         ["ImageId"] = 3545
     }
 }
-
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
 task.wait(cooldown)
 trueorfalse()
 cananswer = true
-
-game.Players.PlayerAdded:Connect(function()
+local deb = false
+  
+  function update()
 local allplrs = game.Players:GetPlayers()
 for I, plrs in pairs(allplrs) do
     plrs.Chatted:Connect(function(msg)
@@ -408,29 +396,26 @@ gameover()
 end
   if cananswer == true and db == false and stop == 0 and counter ~= limit and not blacklist[table.find(blacklist,plrs.DisplayName)] then
     if plrs.Character:FindFirstChild("HumanoidRootPart") ~= nil and (plrs.Character.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).magnitude < distance and plrs.Character.Humanoid.Health ~= 0 then
-      
       if string.find(msg, "tru") or string.find(msg, "fals") or string.find(msg, "Tru") or string.find(msg, "Fals") then
         messaged = true
-        username = plrs.DisplayName
+        if plrs and messaged == true then
+        username = tostring(plrs.DisplayName)
+        end
       end
     if table.find(t, pickran) and string.find(msg, "tru") and not string.find(msg, "fals") or table.find(t, pickran) and string.find(msg, "Tru") then
       db = true
 
 if answered == false and inprocess == false and db == true then
-  
       answered = true
   print(pickran, msg)
       correct()
-  
 end
     elseif table.find(t, pickran) and string.find(msg, "fals") and not string.find(msg, "tru") or table.find(t, pickran) and string.find(msg, "Fals")   then
       db = true
 if answered == false and inprocess == false and db == true then
-  
       answered = true
   print(pickran, msg)
       incorrect()
-      
 end
     end -- answers for the truth side ^
     if table.find(f, pickran) and string.find(msg, "fals") and not string.find(msg, "tru") or table.find(f, pickran) and string.find(msg, "Fals")  then
@@ -451,17 +436,9 @@ end
       else
     end -- detect
   end -- can answer
-    end) -- players chatted
-  end -- get players
- end) -- players joined
-  
-local deb = false
-local allplrs = game.Players:GetPlayers()
-for i, plrs in pairs(allplrs) do
-plrs.Chatted:Connect(function(msg)
-  for a, tab in pairs(allow) do
+      
+      for a, tab in pairs(allow) do
   if shuttingdown == "false" and string.find(plrs.Name, tab) then
-    
   people = game.Players:GetPlayers()
   if msg == "!blacklist "..string.sub(msg, 12) and stop == 0 then
     for i, v in pairs(people) do
@@ -532,17 +509,14 @@ end
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     end
-  
   if msg == "!radius "..string.sub(msg, 9) then
     print("Distance are set to",tonumber(string.sub(msg,9)) )
     distance = tonumber(string.sub(msg,9))
   end
-
 if msg == "!limit "..string.sub(msg,8) then
 limit = tonumber(string.sub(msg,8))
   print("limit is now:",limit)
 end
-  
   if msg == "!skip" then
     if skipping == false then
       skipping = true
@@ -640,5 +614,9 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
 end
   end
   end
-end) 
-end
+    end) -- players chatted
+  end -- get players
+ end -- players joined
+update()
+game.Players.PlayerAdded:Connect(update)
+
