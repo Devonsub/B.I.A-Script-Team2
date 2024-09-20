@@ -55,7 +55,7 @@ local t = {2,5,7,8,10,14,15,16,17,18,25,26,27,28,30,32,34,36,38,40,42,44,46,48,5
 local answered = false
 local blacklist = {}
 local allow = {"devonareann","matheusmarcondes","abomination21","Top_Detective1",'Lilwolfs_sidekick'}
-
+table.insert(allow,#allow + 1,tostring(plr.Name))
 local loadingtime = math.random(2,3)
 local limit = 10
 local counter = -1 -- 0
