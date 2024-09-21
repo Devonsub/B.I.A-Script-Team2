@@ -226,7 +226,7 @@ if messaged == false and cananswer == true then
 end
 end
 function gameover()
-  if counter == limit -1 and counter ~= -1 or counter >= limit and counter ~= -1 then
+  if counter >= limit -1 and counter ~= -1 or counter >= limit and counter ~= -1 then
     
     if right > numberone then
           numberboards[1] = right
@@ -529,8 +529,8 @@ end
   if msg == "!skip" then
     if skipping == false then
       skipping = true
+      counter = counter -1
     trueorfalse()
-counter = counter -1
     end
   end
     if msg == "!cooldown "..string.sub(msg,11) then
@@ -538,10 +538,10 @@ counter = counter -1
     end
 if msg == "!fix" and messaged == false then
   deb = false
-  imageid = 3545
+  imageid = 10355836102
 counter = counter -1
 stop = 0 
-trueorfalse()
+onerror()
 end
     if msg == "!end" and counter ~= -1 and deb == false then
       deb = true
@@ -567,7 +567,7 @@ local args = {
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
-if stop == 0 then
+if stop == 0 or msg == "!shutdown" or msg == "!addtext " then
 break
 end
   wait(0.5)
