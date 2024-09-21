@@ -1,4 +1,5 @@
-local plr = game.Players.LocalPlayer
+--Made by Devon_Agent
+local plr = game.Players.LocalPlayer -- 156467121 my user ID
 local questions = {"The human skeleton is made up of less than 100 bones.",
   "Mount Everest is the highest mountain in the world.",
   "The Great Wall of China can be seen from space.", 
@@ -11,7 +12,7 @@ local questions = {"The human skeleton is made up of less than 100 bones.",
   "Roblox was created 2006", "Roblox was made 2006", "Roblox was made 2004", "Dolphins sleep with one eye open.",
   "Frogs can drink water through their skin.", "The adult human body has 32 teeth.","Gold is a good conductor of electricity.",
   "Antibiotics are effective against viruses.", "Mercury is the hottest planet in the solar system.",
-  "Sound travels faster than light.",
+  "SOUND travels faster than LIGHT.",
   "Camels store water in their humps.","Lightning never strikes the same place twice.", 
   "“Its” and “It’s” have the same meaning.",
   "“Affect” is a verb, and “effect” is a noun.",
@@ -39,21 +40,24 @@ local questions = {"The human skeleton is made up of less than 100 bones.",
   "The first human landing on the Moon was in 1969.","The Aztec civilization was primarily located in what is now Canada."," The initial construction of the Great Wall of China began during the reign of Emperor Qin Shi Huang.",
   "The United States Declaration of Independence was signed in 1776.", " The Aztec civilization was primarily located in what is now Canada.",
   "The ancient Egyptian civilization was located along the Amazon River.", "“You and I” is always correct, and “You and me” is always incorrect.",
-  "The Titanic was discovered before the 20th century ended.","Humans have more than five senses.','The Mona Lisa was painted by Leonardo da Vinci.", "Albert Einstein was awarded the Nobel Prize in Physics for the theory of relativity.",
+  "The Titanic was discovered before the 20th century ended.","Humans have more than five senses.", "Albert Einstein was awarded the Nobel Prize in Physics for the theory of relativity.",
   "There are two parts of the body that can't heal themselves", "Venus is the hottest planet in the solar system",
 "India is the most populated country in the world", "M&M (snack) stands for Mars and Moordale", "The Caesar salad was invented in France", 
   "A golf ball is the fastest-recorded object in sports", "NBA stands for National Basketball Association", "If you sneeze with your eyes open, then your eyes will pop out",
   "Eating too many carrots can make your skin turn orange", "You can swallow and breathe at the same time", "You’re shorter at night than you are in the morning",
-  "You can sneeze during your sleep", "Our blood contains gold", "There are 14 bones in a human foot", "Honey will usually never go bad", "Pizza was invented in Rome, Italy", "Ketchup was once used to cure diseases like diarrhoea and colds",
-  "The Olympics are held every five years","Bananas are curved because they grow upwards towards the sun","Peeing on a jellyfish sting helps with the pain"}
+  "You can sneeze during your sleep", "Our blood contains gold", "There are 14 bones in a human foot", "Honey will usually never go bad", "Pizza was invented in Rome, Italy", "Ketchup was once used to cure certain diseases",
+  "The Olympics are held every five years","Bananas are curved because they grow upwards towards the sun","Peeing on a jellyfish sting helps with the pain","Roblox was released on 2006",
+  "The human body has 206 bones.","LIGHT travels faster than SOUND.","2 days is 48 hours","'A' is the most common letter used in the English language","When the two numbers on opposite sides of a dice are added together it always equals 7",
+"In the English language there is no word that rhymes with orange","A lion's roar can be heard up to eight kilometres away","Fish cannot blink","Goldfish have a two second memory"} -- "" 
 local getquestions = 0
 for I, v in pairs(questions) do
 print(I, v)
 end
-local f = {1,3,4,6,9,11,12,13,19,20,21,22,23,24,29,31,33,35,37,39,41,43,45,47,49,51,54,57,58,59,63,64,67,66,68,69,70,71,72,74,76,78,79,80,82} -- false section
-local t = {2,5,7,8,10,14,15,16,17,18,25,26,27,28,30,32,34,36,38,40,42,44,46,48,50,52,53,55,56,60,61,62,65,73,75,77,81} -- true section
+local f = {1,3,4,6,9,11,12,13,19,20,21,22,23,24,29,31,33,35,37,39,41,43,45,47,49,51,54,57,58,59,63,64,67,66,68,69,70,72,74,76,78,79,80,82,87,92} -- false section
+local t = {2,5,7,8,10,14,15,16,17,18,25,26,27,28,30,32,34,36,38,40,42,44,46,48,50,52,53,55,56,60,61,62,65,71,73,75,77,81,83,84,85,86,88,89,91,90} -- true section
+
 local answered = false
-local blacklist = {}
+local blacklist = {"Nil"}
 local allow = {"devonareann","matheusmarcondes","abomination21","Top_Detective1",'Lilwolfs_sidekick'}
 table.insert(allow,#allow + 1,tostring(plr.Name))
 local loadingtime = math.random(2,3)
@@ -81,6 +85,8 @@ local justsend = false
 local ifchatted = false
 local messaged = false
 local skipping = false
+local imageid = 10355836102 -- 3545
+
 
 function trueorfalse()
 if messaged == true then
@@ -94,35 +100,19 @@ if gamereset == false and counter ~= limit and stop == 0 then
 if counter >= limit then
 else
   pickran = math.random(1,#questions)
-  
   local args = {
     [1] = "Update",
-    [2] = {
-        ["DescriptionText"] = "Loading..." ,
-        ["ImageId"] = 3545
-    }
-}
-
+    [2] = {["DescriptionText"] = "Loading..." ,["ImageId"] = imageid}}
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
 wait(1)
   local args = {
     [1] = "Update",
-    [2] = {
-        ["DescriptionText"] = "True or False?" ,
-        ["ImageId"] = 3545
-    }
-}
-
+    [2] = {["DescriptionText"] = "True or False?" ,["ImageId"] = imageid}}
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
   wait(waittime)
   local args = {
     [1] = "Update",
-    [2] = {
-        ["DescriptionText"] = questions[pickran],
-        ["ImageId"] = 3545
-    }
-}
-
+    [2] = {["DescriptionText"] = questions[pickran],["ImageId"] = imageid}}
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
   skipping = false
   answered = false
@@ -140,21 +130,19 @@ end
   justsend = false
 ifchatted = false
 end
-
 function onerror()
 counter = counter -1
 local args = {
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "Skipping question..",
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
 wait(cooldown)
   trueorfalse()
 end
-
 function correct()
   if db == true and answered == true and inprocess == false and justsend == false and messaged == true and counter ~= limit and gamereset == false and stop == 0 then
   cananswer = false
@@ -163,8 +151,8 @@ function correct()
   local args = {
     [1] = "Update",
     [2] = {
-        ["DescriptionText"] = "Correct.",
-        ["ImageId"] = 3545
+        ["DescriptionText"] = "✔️ Correct.",
+        ["ImageId"] = imageid
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -173,7 +161,7 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "You now have ["..right.."] points.",
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -183,7 +171,7 @@ if db == false and answered == true then
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "Next question..",
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
 
@@ -193,7 +181,6 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     end
 return
   else
- print("Not working UGH")
     onerror()
 return
   end
@@ -201,7 +188,6 @@ return
 if messaged == false and cananswer == true then
 end
 end
-
 function incorrect()
   if db == true and answered == true and inprocess == false and justsend == false and messaged == true and counter ~= limit and gamereset == false and stop == 0 then
   cananswer = false
@@ -210,8 +196,8 @@ function incorrect()
   local args = {
     [1] = "Update",
     [2] = {
-        ["DescriptionText"] = "Wrong.",
-        ["ImageId"] = 3545
+        ["DescriptionText"] = "❌ Wrong.",
+        ["ImageId"] = imageid
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -221,7 +207,7 @@ if db == false then
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "Next question..",
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -231,25 +217,28 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     return
 else
 print("Not working UGH")
-  onerror()
+  answered = false
+  db = false
+ -- onerror()
 return
   end
 if messaged == false and cananswer == true then
 end
 end
 function gameover()
-  if counter == limit or counter >= limit then
+  if counter == limit -1 and counter ~= -1 or counter >= limit and counter ~= -1 then
+    
     if right > numberone then
           numberboards[1] = right
           numberone = right
           leaderboard[1] = username
-          print("1",leaderboard[1],numberboards[1]) print("2",leaderboard[2],numberboards[2])
+          print("1st",leaderboard[1],numberboards[1])
         end
 local args = {
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "Game Over",
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -259,7 +248,7 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "You've won!",
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -268,7 +257,7 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "Tied.",
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -277,7 +266,7 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "You've lost.",
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -287,7 +276,7 @@ local args = {
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "You've Gotten:        "..right.." Rights  "..wrong.."  Wrongs",
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -297,7 +286,7 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "Top Player:          1st. "..tostring(leaderboard[1]).." ["..tostring(numberboards[1]).."]          Your Score: "..right,
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
     game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -306,13 +295,15 @@ local args = {
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "Restarting...",
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
-
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     print("Restarting")
 wait(waittime + cooldown)
+    if right == limit or numberone == limit then
+      limit = limit + 2
+    end
     counter = -1
 right = 0
 wrong = 0
@@ -325,48 +316,28 @@ end
 function starting()
 local args = {
     [1] = "Update",
-    [2] = {
-        ["DescriptionText"] = "Starting.",
-        ["ImageId"] = 0
-    }
-}
+    [2] = {["DescriptionText"] = "Starting.",["ImageId"] = 0}}
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
   task.wait(4)
 for i = 1,loadingtime do
   local args = {
     [1] = "Update",
-    [2] = {
-        ["DescriptionText"] = "Loading",
-        ["ImageId"] = 0
-    }
-}
+    [2] = {["DescriptionText"] = "Loading",["ImageId"] = 0}}
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
   task.wait(cooldown)
   local args = {
     [1] = "Update",
-    [2] = {
-        ["DescriptionText"] = "Loading.",
-        ["ImageId"] = 0
-    }
-}
+    [2] = {["DescriptionText"] = "Loading.",["ImageId"] = 0}}
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
   task.wait(cooldown)
   local args = {
     [1] = "Update",
-    [2] = {
-        ["DescriptionText"] = "Loading..",
-        ["ImageId"] = 0
-    }
-}
+    [2] = {["DescriptionText"] = "Loading..",["ImageId"] = 0}}
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
   task.wait(cooldown)
   local args = {
     [1] = "Update",
-    [2] = {
-        ["DescriptionText"] = "Loading...",
-        ["ImageId"] = 0
-    }
-}
+    [2] = {["DescriptionText"] = "Loading...",["ImageId"] = 0}}
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
   task.wait(cooldown)
 end
@@ -375,17 +346,13 @@ starting()
 wait(coldown)
 local args = {
     [1] = "Update",
-    [2] = {
-        ["DescriptionText"] = "Completed!",
-        ["ImageId"] = 3545
-    }
-}
+    [2] = {["DescriptionText"] = "V5.2 Loaded!",["ImageId"] = imageid}}
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
 task.wait(cooldown)
 trueorfalse()
 cananswer = true
+canadd = false
 local deb = false
-  
   function update()
 local allplrs = game.Players:GetPlayers()
 for I, plrs in pairs(allplrs) do
@@ -396,74 +363,102 @@ gameover()
 end
   if cananswer == true and db == false and stop == 0 and counter ~= limit and not blacklist[table.find(blacklist,plrs.DisplayName)] then
     if plrs.Character:FindFirstChild("HumanoidRootPart") ~= nil and (plrs.Character.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).magnitude < distance and plrs.Character.Humanoid.Health ~= 0 then
-      if string.find(msg, "tru") or string.find(msg, "fals") or string.find(msg, "Tru") or string.find(msg, "Fals") then
+      if string.find(msg, "tru") or string.find(msg, "fals") or string.find(msg, "Tru") or string.find(msg, "Fals") or string.find(msg, "TRU") or string.find(msg, 'FALS') then
         messaged = true
         if plrs and messaged == true then
         username = tostring(plrs.DisplayName)
         end
       end
-    if table.find(t, pickran) and string.find(msg, "tru") and not string.find(msg, "fals") or table.find(t, pickran) and string.find(msg, "Tru") then
+    if table.find(t, pickran) and string.find(msg, "tru") and not string.find(msg, "fals") or table.find(t, pickran) and string.find(msg, "Tru") or table.find(t, pickran) and string.find(msg, "TRU") then
       db = true
-
 if answered == false and inprocess == false and db == true then
       answered = true
   print(pickran, msg)
       correct()
 end
-    elseif table.find(t, pickran) and string.find(msg, "fals") and not string.find(msg, "tru") or table.find(t, pickran) and string.find(msg, "Fals")   then
+    elseif table.find(t, pickran) and string.find(msg, "fals") and not string.find(msg, "tru") or table.find(t, pickran) and string.find(msg, "Fals") or table.find(t, pickran) and string.find(msg, "FALS") then
       db = true
 if answered == false and inprocess == false and db == true then
-      answered = true
-  print(pickran, msg)
-      incorrect()
+      answered = true print(pickran, msg) incorrect()
 end
     end -- answers for the truth side ^
-    if table.find(f, pickran) and string.find(msg, "fals") and not string.find(msg, "tru") or table.find(f, pickran) and string.find(msg, "Fals")  then
+    if table.find(f, pickran) and string.find(msg, "fals") and not string.find(msg, "tru") or table.find(f, pickran) and string.find(msg, "Fals") or table.find(f, pickran) and string.find(msg, "FALS") then
       db = true
 if answered == false and inprocess == false and db == true then
-      answered = true
-  print(pickran, msg)
-      correct()
+      answered = true print(pickran, msg) correct()
 end
-    elseif table.find(f, pickran) and string.find(msg, "tru") and not string.find(msg, "fals") or table.find(f, pickran) and string.find(msg, "Tru") and not string.find(msg, "Fals")  then
+    elseif table.find(f, pickran) and string.find(msg, "tru") and not string.find(msg, "fals") or table.find(f, pickran) and string.find(msg, "Tru") and not string.find(msg, "Fals") or table.find(f, pickran) and string.find(msg, "TRU") then
       db = true
 if answered == false and inprocess == false and db == true then
-      answered = true
-  print(pickran, msg)
-      incorrect()
+      answered = true print(pickran, msg) incorrect()
 end
     end -- answers for the false side
       else
     end -- detect
   end -- can answer
-      
       for a, tab in pairs(allow) do
-  if shuttingdown == "false" and string.find(plrs.Name, tab) then
-  people = game.Players:GetPlayers()
-  if msg == "!blacklist "..string.sub(msg, 12) and stop == 0 then
-    for i, v in pairs(people) do
-      if string.find(v.Name, tostring(string.sub(msg,12))) or string.find(v.DisplayName, tostring(string.sub(msg,12)))  then
-        if v.DisplayName then
-        table.insert(blacklist,#blacklist + 1,tostring(v.DisplayName))
-        print("Blacklist:", table.concat(blacklist,""))
-        else
-          print(v.Name, "Dont have display name!")
+        if shuttingdown == "false" and string.find(plrs.Name, tab) then
+          people = game.Players:GetPlayers()
+          if msg == "!blacklist "..string.sub(msg, 12) and stop == 0 and deb == false and not string.find(msg,"!blacklist all") then
+            for i, v in pairs(people) do
+              if string.find(v.Name, tostring(string.sub(msg,12))) or string.find(v.DisplayName, tostring(string.sub(msg,12)))  then
+                if v.DisplayName and deb == false then
+                deb = true
+                  table.insert(blacklist,#blacklist + 1,tostring(v.DisplayName))
+                  print("Blacklist:", table.concat(blacklist,""))
+                  wait(8)
+                  deb = false
+                else
+                  print(v.Name, "Dont have display name!")
+            end
+          end
         end
       end
-    end
-  end
-  
-  if msg == "!unblacklist "..string.sub(msg,14) and stop == 0 then
+          if msg == '!blacklist all' and deb == false then
+            deb = true
+            for i, v in pairs(people) do
+              wait()
+              for n, t in pairs(blacklist) do
+                wait()
+                if not string.find(v.DisplayName,t) and canadd == false then
+                  canadd = true
+                  if string.find(v.DisplayName,t) then
+                    print(v.DisplayName, 'Is already there....')
+                  else
+                  table.insert(blacklist,#blacklist + 1,tostring(v.DisplayName))
+                  wait(.1)
+                  print("Blacklist:", table.concat(blacklist,""))
+                  canadd = false
+                    end
+                end
+              end
+            end
+            wait(8)
+            deb = false
+          end
+          if msg == '!unblacklist all' and deb == false then
+            deb = true
+            for i, v in pairs(people) do
+              for n, t in pairs(blacklist) do
+                if string.find(t,tostring(v.DisplayName)) then
+                  table.remove(blacklist,blacklist[t] )
+                  wait()
+                  print("UnBlacklisting:", table.concat(blacklist,""))
+                end
+              end
+            end
+            wait(5)
+            deb = false
+          end
+  if msg == "!unblacklist "..string.sub(msg,14) and stop == 0 and not string.find(msg,"!unblacklist all") then
     for i, v in pairs(people) do
       for n, t in pairs(blacklist) do
         if string.find(t,tostring(string.sub(msg,14))) then
           table.remove(blacklist,blacklist[t] )
-          print("UnBlacklist:", table.concat(blacklist,""))
         end
       end
     end
   end
-  
     if msg == "!allow "..string.sub(msg,8) and deb == false then
       deb = true
       for i, v in pairs(people) do
@@ -477,7 +472,6 @@ end
       end
       end
     end
-    
     if msg == "!unallow "..string.sub(msg,10) then
       for i, v in pairs(people) do
       for n, t in pairs(allow) do
@@ -488,13 +482,12 @@ end
       end
       end
     end
-
 if msg == "!addtext "..string.sub(msg,10) then 
 local args = {
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = string.sub(msg,10),
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -504,19 +497,35 @@ end
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = 'your commands are: blacklist, unblacklist [DisplayName],skip, fix, stop, pause, continue, addtext [text], limit [number], radius [number], setpoints [number], setwrongs [number]',
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     end
-  if msg == "!radius "..string.sub(msg, 9) then
+  if msg == "!radius "..string.sub(msg, 9) and deb == false then
+    deb = true
     print("Distance are set to",tonumber(string.sub(msg,9)) )
     distance = tonumber(string.sub(msg,9))
+    wait(5)
+    deb = false
   end
-if msg == "!limit "..string.sub(msg,8) then
+if msg == "!limit "..string.sub(msg,8) and deb == false then
+  deb = true
 limit = tonumber(string.sub(msg,8))
   print("limit is now:",limit)
+  wait(5)
+  deb = false
 end
+          if msg == '!topplayer '..string.sub(msg,12) then
+            leaderboard[1] = tostring(string.sub(msg,12))
+          end
+          if msg == '!topscore '..string.sub(msg,11) then
+            numberboards[1] = tonumber(string.sub(msg,11))
+            numberone = tonumber(string.sub(msg,11))
+          end
+          if msg == "!imageid "..string.sub(msg,10) then
+            imageid = tonumber(string.sub(msg,10))
+          end
   if msg == "!skip" then
     if skipping == false then
       skipping = true
@@ -525,48 +534,57 @@ counter = counter -1
     end
   end
     if msg == "!cooldown "..string.sub(msg,11) then
-      waittime = string.sub(msg,11)
+      waittime = tonumber(string.sub(msg,11))
     end
 if msg == "!fix" and messaged == false then
+  deb = false
+  imageid = 3545
 counter = counter -1
 stop = 0 
 trueorfalse()
 end
-    if msg == "!end" then
+    if msg == "!end" and counter ~= -1 and deb == false then
+      deb = true
+      if counter ~= -1 then
       counter = limit
+        deb = false
+      end
     end
+    if msg == "!continue" and stop == 1 or msg == "!unpause" and stop == 1 or msg == "!start" and stop == 1 then
+counter = counter -1
+stop = 0 
+trueorfalse()
+end
 if msg == "!stop" or msg == "!pause" then
  stop = 1 
-for I = 1,10 do
-wait(0.5)
+for I = 1,8 do
 stop = 1
 local args = {
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "This Program was stopped by the owner/admin",
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
-
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
 if stop == 0 then
 break
 end
+  wait(0.5)
 end
-end
-if msg == "!continue" and stop == 1 then
-counter = counter -1
-stop = 0 
-trueorfalse()
 end
 if msg == "!setpoints "..string.sub(msg, 12) then
 right = tonumber(string.sub(msg,12))
 end
-if msg == "!addpoints "..string.sub(msg, 12) then
+if msg == "!addpoints "..string.sub(msg, 12) and deb == false then
+  deb = true
 right = right + tonumber(string.sub(msg,12))
+  wait(5) deb = false
 end
-if msg == "!removepoints "..string.sub(msg, 15) then
+if msg == "!removepoints "..string.sub(msg, 15) and deb == false then
+  deb = true
 right = right - tonumber(string.sub(msg,12))
+  wait(5) deb = false
 end
     if msg == "!setwrongs "..string.sub(msg, 12) then
 wrong = tonumber(string.sub(msg,12))
@@ -577,7 +595,6 @@ end
 if msg == "!removewrongs "..string.sub(msg, 15) then
 wrong = wrong - tonumber(string.sub(msg,12))
 end
-  
   if msg == "!shutdown" and stop == 0 then
         shuttingdown = "true"
     stop = 1
@@ -586,7 +603,7 @@ end
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "Shutting Down!",
-        ["ImageId"] = 3545
+        ["ImageId"] = imageid
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -598,7 +615,6 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
         ["ImageId"] = 0
     }
 }
-
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
           wait(1)
         end
@@ -609,7 +625,6 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
         ["ImageId"] = 0
     }
 }
-
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
 end
   end
@@ -619,4 +634,4 @@ end
  end -- players joined
 update()
 game.Players.PlayerAdded:Connect(update)
-
+  
