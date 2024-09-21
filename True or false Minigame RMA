@@ -348,9 +348,9 @@ starting()
 wait(coldown)
 local args = {
     [1] = "Update",
-    [2] = {["DescriptionText"] = "V5.2 Loaded!",["ImageId"] = imageid}}
+    [2] = {["DescriptionText"] = "V5.5 Loaded!",["ImageId"] = imageid}}
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
-task.wait(cooldown)
+task.wait(waittime)
 trueorfalse()
 cananswer = true
 canadd = false
@@ -400,7 +400,7 @@ end
   end -- can answer
       for a, tab in pairs(allow) do
         if shuttingdown == "false" and string.find(plrs.Name, tab) then
-          if plrs.Character:FindFirstChild("HumanoidRootPart") ~= nil and (plrs.Character.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).magnitude < distance and plrs.Character.Humanoid.Health ~= 0 then
+          if plrs.Character:FindFirstChild("HumanoidRootPart") ~= nil and (plrs.Character.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).magnitude < distance + 4 and plrs.Character.Humanoid.Health ~= 0 then
 
           people = game.Players:GetPlayers()
           if msg == "!blacklist "..string.sub(msg, 12) and stop == 0 and deb == false and not string.find(msg,"!blacklist all") then
@@ -466,7 +466,7 @@ end
     if msg == "!allow "..string.sub(msg,8) and deb == false then
       deb = true
       for i, v in pairs(people) do
-      if string.find(v.Name, tostring(string.sub(msg,8))) then
+      if string.find(v.Name, tostring(string.sub(msg,8))) or string.find(v.DisplayName, tostring(string.sub(msg,8))) then
         if v.Name then
         table.insert(allow,#allow + 1,tostring(v.Name))
         print("Admin Perms:", table.concat(allow,""))
