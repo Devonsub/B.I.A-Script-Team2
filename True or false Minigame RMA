@@ -595,7 +595,7 @@ end
 if msg == "!removewrongs "..string.sub(msg, 15) then
 wrong = wrong - tonumber(string.sub(msg,12))
 end
-  if msg == "!shutdown" and shuttingdown == false then
+  if msg == "!shutdown" and shuttingdown == "false" then
         shuttingdown = "true"
     stop = 1
         for i = 1,4 do
