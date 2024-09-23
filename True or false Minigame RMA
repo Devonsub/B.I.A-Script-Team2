@@ -1,5 +1,6 @@
---Made by Devon_Agent
-local plr = game.Players.LocalPlayer -- 156467121 my user ID
+--Script made by Devon_Agent -- 156467121 my user ID
+local plr = game.Players.LocalPlayer
+local coregui = game:GetService("StarterGui")
 local questions = {"The human skeleton is made up of less than 100 bones.",
   "Mount Everest is the highest mountain in the world.",
   "The Great Wall of China can be seen from space.", 
@@ -50,14 +51,15 @@ local questions = {"The human skeleton is made up of less than 100 bones.",
   "The human body has 206 bones.","LIGHT travels faster than SOUND.","2 days is 48 hours","'A' is the most common letter used in the English language","When the two numbers on opposite sides of a dice are added together it always equals 7",
 "In the English language there is no word that rhymes with orange","A lion's roar can be heard up to eight kilometres away","Fish cannot blink","Goldfish have a two second memory","Water molecules from a solution with a high concentration of water molecules move to a solution with a lower concentration of water molecules",
 "All cells are living","All cells have a microcondria", "A cross between a horse and a zebra is called a 'Hobra'","The Earth is made up of different layers and elements", "The Earth's Moon do NOT cause tides", "The Moon is moving away from the Earth each year",
-  "A single strand of Spaghetti isn't called a “Spaghetto.”" } -- "" 
+  "A single strand of Spaghetti isn't called a “Spaghetto.”", "The world’s largest grand piano was built by a 15-year-old in New Zealand.x","Standing around burns calories.","The color red really make bulls angry","If you heat up a magnet, it will increase its magnetism.",'It snows diamonds on planet Venus','You can message blocked users on Roblox'  
+} -- "" 
 local getquestions = 0
 for I, v in pairs(questions) do
 print(I, v)
 end
-local f = {1,3,4,6,9,11,12,13,19,20,21,22,23,24,29,31,33,35,37,39,41,43,45,47,49,51,54,57,58,59,63,64,67,66,68,69,70,72,74,76,78,79,80,82,87,92,95,96,98,100} -- false section
-local t = {2,5,7,8,10,14,15,16,17,18,25,26,27,28,30,32,34,36,38,40,42,44,46,48,50,52,53,55,56,60,61,62,65,71,73,75,77,81,83,84,85,86,88,89,91,90,93,94,97,99} -- true section
-
+local f = {1,3,4,6,9,11,12,13,19,20,21,22,23,24,29,31,33,35,37,39,41,43,45,47,49,51,54,57,58,59,63,64,67,66,68,70,72,74,76,78,80,82,87,92,95,96,98,100,103,104,105,106} -- false section
+local t = {2,5,7,8,10,14,15,16,17,18,25,26,27,28,30,32,34,36,38,40,42,44,46,48,50,52,53,55,56,60,61,62,65,69,71,73,75,77,79,81,83,84,85,86,88,89,91,90,93,94,97,99,101,102} -- true section
+local version = 'V6.3'
 local answered = false
 local blacklist = {"Nil"}
 local allow = {"devonareann","matheusmarcondes","abomination21","Top_Detective1",'Lilwolfs_sidekick'}
@@ -88,6 +90,12 @@ local ifchatted = false
 local messaged = false
 local skipping = false
 local imageid = 10355836102 -- 3545
+local samequestion = 0
+coregui:SetCore("SendNotification", {
+  Title = "RMA Script "..version,
+  Text = "True or false | Made by devonarenn",
+  Icon = "rbxassetid://10355836102"
+})
 
 
 function trueorfalse()
@@ -95,9 +103,15 @@ if messaged == true then
   messaged = false
 end
 counter = counter + 1
+  print('Tries:',counter,"/",limit)
   cananswer = false
   db = true
   inprocess = true
+  coregui:SetCore("SendNotification", {
+  Title = "Stats",
+  Text = 'Tries: '..counter.."/"..limit..' Rights: '..right..'/'..numberone.." Wrongs: "..wrong,
+  Icon = "rbxassetid://10355836102"
+})
 if gamereset == false and counter ~= limit and stop == 0 then
 if counter >= limit then
 else
@@ -112,10 +126,15 @@ wait(1)
     [2] = {["DescriptionText"] = "True or False?" ,["ImageId"] = imageid}}
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
   wait(waittime)
+  if samequestion ~= pickran then
   local args = {
     [1] = "Update",
     [2] = {["DescriptionText"] = questions[pickran],["ImageId"] = imageid}}
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
+  else
+    onerror()
+  end
+  wait(.5)
   skipping = false
   answered = false
 cananswer = true
@@ -142,11 +161,21 @@ local args = {
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
+  coregui:SetCore("SendNotification", {
+  Title = "Unknown Error",
+  Text = "Skipping question.",
+ -- Icon = "rbxassetid://149260638"
+})
 wait(cooldown)
   trueorfalse()
 end
 function correct()
   if db == true and answered == true and inprocess == false and justsend == false and messaged == true and counter ~= limit and gamereset == false and stop == 0 then
+    coregui:SetCore("SendNotification", {
+  Title = "The answer is..",
+  Text = "Correct",
+  Icon = "rbxassetid://149260638"
+})
   cananswer = false
     db = false
     right = right + 1
@@ -154,7 +183,7 @@ function correct()
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "✔️ Correct.",
-        ["ImageId"] = imageid
+        ["ImageId"] = 149260638
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -181,12 +210,13 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
   wait(waittime + cooldown)
   trueorfalse()
     end
-return
-  else
-    onerror()
+  answered = false
+  db = false
+ -- onerror()
 return
   end
   print("correct")
+  onerror()
 if messaged == false and cananswer == true then
 end
 end
@@ -195,11 +225,16 @@ function incorrect()
   cananswer = false
     db = false
     wrong = wrong + 1
+    coregui:SetCore("SendNotification", {
+  Title = "The answer is..",
+  Text = "Wrong",
+  Icon = "rbxassetid://149260273"
+})
   local args = {
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "❌ Wrong.",
-        ["ImageId"] = imageid
+        ["ImageId"] = 149260273
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -228,7 +263,7 @@ if messaged == false and cananswer == true then
 end
 end
 function gameover()
-  if counter >= limit -1 and counter ~= -1 or counter >= limit and counter ~= -1 then
+  if counter >= limit and counter ~= -1 or counter >= limit and counter ~= -1 then
     
     if right > numberone then
           numberboards[1] = right
@@ -236,6 +271,10 @@ function gameover()
           leaderboard[1] = username
           print("1st",leaderboard[1],numberboards[1])
         end
+    if right >= limit -1 then
+      limit = limit + 2
+      print('Limit is now:',limit)
+    end
 local args = {
     [1] = "Update",
     [2] = {
@@ -250,7 +289,7 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "You've won!",
-        ["ImageId"] = imageid
+        ["ImageId"] = 11992304816
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -268,7 +307,7 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     [1] = "Update",
     [2] = {
         ["DescriptionText"] = "You've lost.",
-        ["ImageId"] = imageid
+        ["ImageId"] = 17588679301
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
@@ -303,9 +342,7 @@ local args = {
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     print("Restarting")
 wait(waittime + cooldown)
-    if right == limit or numberone == limit then
-      limit = limit + 2
-    end
+    
     counter = -1
 right = 0
 wrong = 0
@@ -348,7 +385,7 @@ starting()
 wait(coldown)
 local args = {
     [1] = "Update",
-    [2] = {["DescriptionText"] = "V5.5 Loaded!",["ImageId"] = imageid}}
+    [2] = {["DescriptionText"] = version.." Loaded!",["ImageId"] = imageid}}
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
 task.wait(waittime)
 trueorfalse()
@@ -365,19 +402,27 @@ gameover()
 end
   if cananswer == true and db == false and stop == 0 and counter ~= limit and not blacklist[table.find(blacklist,plrs.DisplayName)] then
     if plrs.Character:FindFirstChild("HumanoidRootPart") ~= nil and (plrs.Character.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).magnitude < distance and plrs.Character.Humanoid.Health ~= 0 then
-      if string.find(msg, "tru") or string.find(msg, "fals") or string.find(msg, "Tru") or string.find(msg, "Fals") or string.find(msg, "TRU") or string.find(msg, 'FALS') then
+      if string.find(msg, "tru") and not string.find(msg, "fals") or string.find(msg, "fals") and not string.find(msg, "tru") or string.find(msg, "Tru") or string.find(msg, "Fals") or string.find(msg, "TRU") or string.find(msg, 'FALS') then
         messaged = true
-        if plrs and messaged == true then
+        --print(table.find(questions, pickran))
+        samequestion = pickran
+        print(pickran,questions[pickran],' ',pls.Display,':', msg)
+        if plrs and messaged == true and string.find(msg, "tru") and not string.find(msg, "fals") or plrs and messaged == true and string.find(msg, "Tru") or plrs and messaged == true and string.find(msg, "TRU") then
         username = tostring(plrs.DisplayName)
+          
         end
       end
     if table.find(t, pickran) and string.find(msg, "tru") and not string.find(msg, "fals") or table.find(t, pickran) and string.find(msg, "Tru") or table.find(t, pickran) and string.find(msg, "TRU") then
       db = true
 if answered == false and inprocess == false and db == true then
       answered = true
-  print(pickran, msg)
       correct()
 end
+      if cananswer == true and db == true or cananswer == true and answered == true then
+        db = false
+        answered = false
+       messaged = false 
+      end
     elseif table.find(t, pickran) and string.find(msg, "fals") and not string.find(msg, "tru") or table.find(t, pickran) and string.find(msg, "Fals") or table.find(t, pickran) and string.find(msg, "FALS") then
       db = true
 if answered == false and inprocess == false and db == true then
@@ -405,15 +450,17 @@ end
           people = game.Players:GetPlayers()
           if msg == "!blacklist "..string.sub(msg, 12) and stop == 0 and deb == false and not string.find(msg,"!blacklist all") then
             for i, v in pairs(people) do
+              for n, t in pairs(blacklist) do
+                if not string.find(t,tostring(v.DisplayName)) then
               if string.find(v.Name, tostring(string.sub(msg,12))) or string.find(v.DisplayName, tostring(string.sub(msg,12)))  then
                 if v.DisplayName and deb == false then
                 deb = true
                   table.insert(blacklist,#blacklist + 1,tostring(v.DisplayName))
                   print("Blacklist:", table.concat(blacklist,""))
-                  wait(8)
+                  wait(3)
                   deb = false
-                else
-                  print(v.Name, "Dont have display name!")
+                end
+                end
             end
           end
         end
@@ -437,7 +484,7 @@ end
                 end
               end
             end
-            wait(8)
+            wait(3)
             deb = false
           end
           if msg == '!unblacklist all' and deb == false then
@@ -459,6 +506,8 @@ end
       for n, t in pairs(blacklist) do
         if string.find(t,tostring(string.sub(msg,14))) then
           table.remove(blacklist,blacklist[t] )
+          wait()
+          print("UnBlacklisting:", table.concat(blacklist,""))
         end
       end
     end
@@ -540,16 +589,17 @@ end
     if msg == "!cooldown "..string.sub(msg,11) then
       waittime = tonumber(string.sub(msg,11))
     end
-if msg == "!fix" and messaged == false then
- -- deb = false
+if msg == "!fix" then
+ deb = false
   imageid = 10355836102
 counter = counter -1
 stop = 0 
 onerror()
 end
-    if msg == "!end" and counter ~= -1 and deb == false then
+    if msg == "!end" and counter >= 1 and deb == false then
       deb = true
       if counter ~= -1 then
+        
       counter = limit
         deb = false
       end
@@ -639,4 +689,16 @@ end
  end -- players joined
 update()
 game.Players.PlayerAdded:Connect(update)
+game.Players.PlayerRemoving:Connect(function(onremove)
+  people = game.Players:GetPlayers()
+  for i, v in pairs(people) do
+              for n, t in pairs(blacklist) do
+                if string.find(t,tostring(onremove.DisplayName)) then
+                  table.remove(blacklist,blacklist[t] )
+                  wait()
+                  print("Player Left:", table.concat(blacklist,""))
+                end
+              end
+            end
+end)
   
