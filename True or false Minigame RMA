@@ -1,4 +1,5 @@
 --Script made by Devon_Agent -- 156467121 my user ID
+-- Options:          >[Testing]          [Testing]
 local plr = game.Players.LocalPlayer
 local coregui = game:GetService("StarterGui")
 local questions = {"The human skeleton is made up of less than 100 bones.",
@@ -82,6 +83,7 @@ local distance = 10
 local pickran = 0
 local stop = 0
 local continue = 1
+local whenstopshow = true
 local cananswer = false
 local db = false
 local shuttingdown = "false"
@@ -406,7 +408,7 @@ end
         messaged = true
         --print(table.find(questions, pickran))
         samequestion = pickran
-        print(pickran,questions[pickran],' ',pls.Display,':', msg)
+        print(pickran,questions[pickran],' ',plrs.DisplayName,':', msg)
         if plrs and messaged == true and string.find(msg, "tru") and not string.find(msg, "fals") or plrs and messaged == true and string.find(msg, "Tru") or plrs and messaged == true and string.find(msg, "TRU") then
         username = tostring(plrs.DisplayName)
           
@@ -554,6 +556,12 @@ end
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
+      coregui:SetCore("SendNotification", {
+  Title = "Your commands:",
+  Text = "True or false | Made by devonarenn",
+  Icon = "rbxassetid://10355836102"
+})
+      print('Your admin commands are: !cmds !blacklist [Player Username/Display] !unblacklist [Player Display] !skip !fix !stop or !pause !end !continue or !unpause or !start !topplayer [text] !topscore [number] !imageid [images-ID] !cooldown [duration] !addtext [text] !radius [amount] !limit [amount] !setpoints [amount] !addpoints [amount] !removepoints [amount] !setwrongs [amount] !addwrongs [amount] !removewrongs [amount] !allow [username] - admin perms (usernames ONLY no display.) !unallow [username]  - remove admin powers ⚠️ !shutdown ⚠️ - ending the script cant use commands anymore until script is re-executed ')
     end
   if msg == "!radius "..string.sub(msg, 9) and deb == false then
     deb = true
@@ -569,6 +577,24 @@ limit = tonumber(string.sub(msg,8))
   wait(5)
   deb = false
 end
+            if msg == "!addchance" and deb == false then
+              deb = true
+              counter = counter -1
+              wait(5)
+              deb = false
+            end
+            if msg == "!removechance" and deb == false then
+              deb = true
+              counter = counter +1
+              wait(5)
+              deb = false
+            end
+            if msg == "!enable s" then
+              whenstopshow = true
+            end
+            if msg == "!disable s" then
+              whenstopshow = false
+            end
           if msg == '!topplayer '..string.sub(msg,12) then
             leaderboard[1] = tostring(string.sub(msg,12))
           end
@@ -596,7 +622,7 @@ counter = counter -1
 stop = 0 
 onerror()
 end
-    if msg == "!end" and counter >= 1 and deb == false then
+    if msg == "!end" and counter >= -1 and deb == false then
       deb = true
       if counter ~= -1 then
         
@@ -626,6 +652,17 @@ break
 end
   wait(0.5)
 end
+  if whenstopshow == true then
+  wait()
+  local args = {
+    [1] = "Update",
+    [2] = {
+        ["DescriptionText"] = "True or false minigame, want to play?",
+        ["ImageId"] = imageid
+    }
+}
+game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
+  end
 end
 if msg == "!setpoints "..string.sub(msg, 12) then
 right = tonumber(string.sub(msg,12))
@@ -665,7 +702,7 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
             local args = {
     [1] = "Update",
     [2] = {
-        ["DescriptionText"] = "!",
+        ["DescriptionText"] = "⚠️",
         ["ImageId"] = 0
     }
 }
@@ -680,6 +717,7 @@ game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
     }
 }
 game:GetService("ReplicatedStorage").CustomiseBooth:FireServer(unpack(args))
+    script.Enabled = false
   end
 end
   end
