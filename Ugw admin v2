@@ -1,0 +1,528 @@
+-- made by devonareann
+local coregui = game:GetService("StarterGui")
+coregui:SetCore("SendNotification", {
+  Title = "UGW Script V4",
+  Text = "Ugw admin | Made by devonarenn",
+  Icon = "rbxassetid://10355836102"
+})
+local plr = game.Players.LocalPlayer
+local radius = 45
+local db = false
+local blacklist = {"devonareann"}
+local killaura = false
+local autosnipe = false
+local getflag = false
+local healonce = false
+local autoheal = false
+local autore = false
+local healdb = false
+local flagdb = false
+local canspawn = false
+local cam = game.Workspace.CurrentCamera
+local bpos = game.Workspace.AntiCheat:FindFirstChild("Blue").Position
+local rpos = game.Workspace.AntiCheat:FindFirstChild("Red").Position
+local underground = Vector3.new(3, -22, 1)
+local underblue = Vector3.new(-55, 3, -222)
+local underred = Vector3.new(56, 3, 222)
+print('!enable a, !enable k, !enable p, !autoheal, !nuke, !blacklist, !grab, !switch, !auto respawn')
+plr.PlayerScripts.L_DeathCam:Destroy()
+plr.Chatted:Connect(function(msg)
+  
+ if msg == "!blacklist "..string.sub(msg,12) then
+  onblacklist(msg)
+ end
+ if msg == "!unblacklist "..string.sub(msg,14) then
+  local people = game.Players:GetPlayers()
+    for i, v in pairs(people) do
+      for n, t in pairs(blacklist) do
+        if string.find(t,tostring(string.sub(msg,14))) then
+          coregui:SetCore("SendNotification", {
+         Title = "UnBlacklisting:",
+         Text = t,
+         Icon = "rbxassetid://10355836102"})
+          table.remove(blacklist,blacklist[t] )
+          wait()
+          print("UnBlacklisting:", table.concat(blacklist,""))
+        end
+      end
+    end
+  end
+ if msg == "!enable k" then
+  coregui:SetCore("SendNotification", {
+  Title = "Enabled ",
+  Text = "Kill Aura",
+  Icon = "rbxassetid://10355836102"
+})
+  killaura = true
+  onkillaura()
+ end
+ if msg == "!disable k" then
+  coregui:SetCore("SendNotification", {
+  Title = "Disabled ",
+  Text = "Kill Aura",
+  Icon = "rbxassetid://10355836102"
+})
+  killaura = false
+ end
+ if msg == "!enable a" then
+  coregui:SetCore("SendNotification", {
+  Title = "Enabled ",
+  Text = "Auto Snipe",
+  Icon = "rbxassetid://10355836102"
+})
+  autosnipe = true
+  onautosnipe()
+ end
+ if msg == "!disable a" then
+  coregui:SetCore("SendNotification", {
+  Title = "Disabled ",
+  Text = "Auto Snipe",
+  Icon = "rbxassetid://10355836102"
+})
+  autosnipe = false
+ end
+ 
+ if msg == "!switch" then
+   coregui:SetCore("SendNotification", {
+         Title = "Blackkisting:",
+         Text = "Switching teams",
+         Icon = "rbxassetid://10355836102"})
+  if plr.Team == "Red" then
+   local args = {
+    [1] = "Red"}
+    game:GetService("ReplicatedStorage").Events.Remote.PlayPressed:InvokeServer(unpack(args))
+  else
+   local args = {
+    [1] = "Blue"}
+    game:GetService("ReplicatedStorage").Events.Remote.PlayPressed:InvokeServer(unpack(args))
+  end
+ end
+   
+   if msg == "!nuke" and db == false then
+     db = true
+     game:GetService("ReplicatedStorage").Events.Remote.Nuke:FireServer()
+     wait(1)
+     db = false
+   end
+  
+   if msg == "!grab" and flagdb == false or msg == "!grab flag" and flagdb == false then
+    flagdb = true
+     if plr.Team == game:GetService("Teams")["Red"] and game.Workspace.Map.Blue.Flag.Handle ~= nil then
+      game.Workspace.Map.Blue.Flag.Handle.Position = plr.Character.HumanoidRootPart.Position
+     elseif plr.Team == game:GetService("Teams")["Blue"] and game.Workspace.Map.Red.Flag.Handle ~= nil then
+      game.Workspace.Map.Red.Flag.Handle.Position = plr.Character.HumanoidRootPart.Position
+     end
+     coregui:SetCore("SendNotification", {
+         Title = "Info:",
+         Text = "Grabbing Flag",
+         Icon = "rbxassetid://10355836102"})
+     wait(30)
+     flagdb = false
+     coregui:SetCore("SendNotification", {
+         Title = "Info:",
+         Text = "Cooldown set",
+         Icon = "rbxassetid://10355836102"})
+     if plr.Character:FindFirstChild("FlagAccessory") then
+       wait()
+       coregui:SetCore("SendNotification", {
+         Title = "Info:",
+         Text = "Setting flag",
+         Icon = "rbxassetid://10355836102"})
+       
+       if plr.Team == game:GetService("Teams")["Red"] and game.Workspace.AntiCheat:FindFirstChild("Red") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Red").Position = plr.Character.HumanoidRootPart.Position
+    game.Workspace.AntiCheat:FindFirstChild("Red").Transparency = 0.5
+     elseif plr.Team == game:GetService("Teams")["Blue"] and game.Workspace.AntiCheat:FindFirstChild("Blue") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Blue").Position = plr.Character.HumanoidRootPart.Position
+       game.Workspace.AntiCheat:FindFirstChild("Blue").Transparency = 0.5
+     end
+  wait(1.5)
+    if plr.Team == game:GetService("Teams")["Red"] and game.Workspace.AntiCheat:FindFirstChild("Red") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Red").Position = bpos
+     elseif plr.Team == game:GetService("Teams")["Blue"] and game.Workspace.AntiCheat:FindFirstChild("Blue") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Blue").Position = rpos
+     end
+       wait()
+       if plr.Team == game:GetService("Teams")["Red"] and game.Workspace.Map.Blue.Flag.Handle ~= nil then
+         game.Workspace.Map.Red.Flag.Handle.Position = plr.Character.HumanoidRootPart.Position
+         wait()
+         game.Workspace.Map.Blue.Flag.Handle.Position = game.Workspace.Map.Blue.Flag.Handle.Position + Vector3.new(0,15,0)
+         game.Workspace.Map.Red.Flag.Handle.Position = game.Workspace.Map.Red.Flag.Handle.Position + Vector3.new(0,15,0)
+
+         elseif plr.Team == game:GetService("Teams")["Blue"] and game.Workspace.Map.Red.Flag.Handle ~= nil then
+           game.Workspace.Map.Blue.Flag.Handle.Position = plr.Character.HumanoidRootPart.Position
+           wait()
+           game.Workspace.Map.Red.Flag.Handle.Position = game.Workspace.Map.Red.Flag.Handle.Position + Vector3.new(0,15,0)
+           game.Workspace.Map.Blue.Flag.Handle.Position = game.Workspace.Map.Blue.Flag.Handle.Position + Vector3.new(0,15,0)
+
+       end
+     end
+   end
+ 
+  if msg == "!enable p" then
+    coregui:SetCore("SendNotification", {
+  Title = "Enabled ",
+  Text = "Auto get flag",
+  Icon = "rbxassetid://10355836102"
+})
+    getflag = true
+    trackflag()
+  end
+  
+  if msg == "!disable p" then
+    coregui:SetCore("SendNotification", {
+  Title = "Disabled ",
+  Text = "Auto get flag",
+  Icon = "rbxassetid://10355836102"
+})
+    getflag = false
+  end
+  
+  if msg == "!autoheal" or msg == "!autoheal teammates" then
+    coregui:SetCore("SendNotification", {
+  Title = "Enabled ",
+  Text = "Auto healing teammates",
+  Icon = "rbxassetid://10355836102"
+})
+    autoheal = true
+    onautoheal()
+  end
+  
+  if msg == "!unautoheal" then
+    coregui:SetCore("SendNotification", {
+  Title = "Disabled ",
+  Text = "Auto healing teammates",
+  Icon = "rbxassetid://10355836102"
+})
+    autoheal = false
+  end
+  
+  if msg == "!auto respawn" then
+    coregui:SetCore("SendNotification", {
+  Title = "Enabled ",
+  Text = "Auto respawn",
+  Icon = "rbxassetid://10355836102"
+})
+    autore = true
+    onautore()
+  end
+  
+  if msg == "!unauto respawn" then
+    coregui:SetCore("SendNotification", {
+  Title = "Disabled ",
+  Text = "Auto respawn",
+  Icon = "rbxassetid://10355836102"
+})
+    autore = false
+  end
+--[[ if msg == "!h" and healdb == false then
+  healdb = true
+  local people = game.Players:GetPlayers()
+  local distance = 100
+  game:GetService("ReplicatedStorage").Events.Remote.PlayerUseMedkit:FireServer()
+  for i, plrs in pairs(people) do
+   if plrs.Character:FindFirstChild("HumanoidRootPart") ~= nil and (plrs.Character.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).magnitude < distance and plrs.Character.Humanoid.Health ~= 0 and plrs.Team == plr.Team and not blacklist[table.find(blacklist,plrs.DisplayName)] then
+    for i = 1,#people do
+     plr.Character:FindFirstChild("HumanoidRootPart").CFrame = plrs.Character:FindFirstChild("HumanoidRootPart").CFrame
+     wait(1.1)
+    end
+    
+   end
+  end
+ end]]
+  
+  
+end)
+
+function onblacklist(msg)
+  local people = game.Players:GetPlayers()
+  for i, v in pairs(people) do
+   for n, t in pairs(blacklist) do
+    if not string.find(t,tostring(v.DisplayName)) then
+     if string.find(v.Name, tostring(string.sub(msg,12))) or string.find(v.DisplayName, tostring(string.sub(msg,12)))  then
+      if v.DisplayName and db == false and not string.find(t,tostring(v.DisplayName)) then
+       db = true
+        coregui:SetCore("SendNotification", {
+         Title = "Blacklisting:",
+         Text = tostring(v.DisplayName),
+         Icon = "rbxassetid://10355836102"})
+        if not string.find(t,tostring(string.sub(msg,14))) then
+          print('player is aready added')
+        else
+       table.insert(blacklist,#blacklist + 1,tostring(v.DisplayName))
+        end
+       print("Blacklist:", table.concat(blacklist,""))
+       wait()
+       db = false
+      end
+     end
+    end
+   end
+  end
+ end
+
+function onkillaura()
+ repeat
+  wait()
+  if killaura == false then
+   wait()
+   break
+  end
+  local people = game.Players:GetPlayers()
+  for i, plrs in pairs(people) do
+    if plrs and plrs.Character ~= nil then
+      if plrs.Character ~= nil and plrs.Character:FindFirstChild("HumanoidRootPart") ~= nil and plr.Character ~= nil and plr.Character:FindFirstChild("HumanoidRootPart") ~= nil and plrs ~= plr and plr.Character.Humanoid.Health ~= 0 and plrs.Neutral == false then
+
+      if plrs.Character:FindFirstChild("HumanoidRootPart") ~= nil and (plrs.Character.HumanoidRootPart.Position - plr.Character.HumanoidRootPart.Position).magnitude < radius and plrs.Character.Humanoid.Health ~= 0 and plrs.Team ~= plr.Team and not blacklist[table.find(blacklist,plrs.DisplayName)] then
+        if plr.Character:FindFirstChild("Sword") ~= nil then
+         plr.Character:FindFirstChild("Sword").GripPos = Vector3.new(0,0,10)
+         if plr.Character:FindFirstChild("L_Optimizations") ~= nil then
+plr.Character:FindFirstChild("L_Optimizations"):Destroy()
+plr.Character:FindFirstChild("L_AntiCheat"):Destroy()
+wait()
+plr.Character:FindFirstChild("Sword"):FindFirstChild('Handle').Size = Vector3.new(15,15,15)
+plr.Character:FindFirstChild("Sword"):FindFirstChild('Handle').Transparency= 1
+end plr.Character:FindFirstChild("Sword"):FindFirstChild('Handle').Massless = true
+          plr.Character:FindFirstChild("Sword"):FindFirstChild('Handle').Position = plrs.Character:FindFirstChild("HumanoidRootPart").Position
+          plr.Character:FindFirstChild("Sword"):FindFirstChild('Handle').Orientation = plr.Character:FindFirstChild("Sword"):FindFirstChild('Handle').Orientation + Vector3.new(0,30,0)
+
+        else
+          if plr.Backpack:FindFirstChild("Sword") then
+          plr.Backpack:FindFirstChild("Sword").Parent = plr.Character
+          end
+        end
+          end
+      end
+    end
+  end
+ until killaura == false
+end
+
+function onautosnipe()
+ repeat
+  wait()
+local plrs = game.Players:GetPlayers()
+  local item = {"Sniper"}
+  local distance = 800
+  local cooldown = 5
+  
+  for i, v in pairs(plrs) do
+   -- wait()
+    local plrschr = v.Character
+    local plrchr = plr.Character
+    if v.Character ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and plrchr ~= nil and plrchr:FindFirstChild("HumanoidRootPart") ~= nil and v ~= plr and plrchr.Humanoid.Health ~= 0 then
+      if v.Character:FindFirstChild("HumanoidRootPart") ~= nil and (v.Character.HumanoidRootPart.Position - plrchr.HumanoidRootPart.Position).magnitude < distance and v.Character.Humanoid.Health ~= 0 and v.Team ~= plr.Team and not blacklist[table.find(blacklist,v.DisplayName)] then
+        local detectplrs = Ray.new(plrchr.HumanoidRootPart.Position, (v.Character.HumanoidRootPart.Position - plrchr.HumanoidRootPart.Position).Unit * distance)
+        local hit, position = game.workspace:FindPartOnRayWithIgnoreList(detectplrs, {plrchr})
+        ison = true
+        if v.Character:FindFirstChild("HumanoidRootPart") and not blacklist[table.find(blacklist,v.DisplayName)] and hit == v.Character.HumanoidRootPart then
+          if plr.Backpack:FindFirstChild("Sniper") ~= nil then
+            plr.Backpack.Sniper.Parent = plrchr
+            local args = {
+    [1] = Vector3.new(v.Character.HumanoidRootPart.Position.X,v.Character.HumanoidRootPart.Position.Y,v.Character.HumanoidRootPart.Position.Z),
+    [2] = "Sniper",
+    [3] = game:GetService("Players").LocalPlayer.Character.Sniper }
+           game:GetService("ReplicatedStorage").Events.Remote.ShotTarget:FireServer(unpack(args))
+          end -- else
+            if plrchr:FindFirstChild("Sniper") then
+            local args = {
+    [1] = Vector3.new(v.Character.HumanoidRootPart.Position.X,v.Character.HumanoidRootPart.Position.Y,v.Character.HumanoidRootPart.Position.Z),
+    [2] = "Sniper",
+    [3] = game:GetService("Players").LocalPlayer.Character.Sniper }
+             game:GetService("ReplicatedStorage").Events.Remote.ShotTarget:FireServer(unpack(args))
+          end -- is the sniper in the backpack?
+          else
+          wait(1)
+      if plrchr:FindFirstChild("Sniper") ~= nil then
+        --plrchr.Sniper.Parent = plr.Backpack
+        end -- on hit
+      end -- radius
+      end
+    end -- if plr and plrs exist
+  end -- for i loop
+  if autosnipe == false then
+   wait()
+   break
+  end
+ until autosnipe == false
+end
+
+function onautoheal()
+  -- medkit spam
+  repeat
+wait()
+if plr.Team == game:GetService("Teams")["Red"] then
+   local args = {
+    [1] = "Red"}
+    game:GetService("ReplicatedStorage").Events.Remote.PlayPressed:InvokeServer(unpack(args))
+ for i, plrs in pairs(game.Players:GetPlayers()) do
+wait(.05)
+   if plrs and plrs.Character ~= nil then
+  if plr.Character:FindFirstChild("HumanoidRootPart") and plrs.Character:FindFirstChild("HumanoidRootPart") and plrs.Team == plr.Team then
+if plrs.Character.Humanoid.Health < 100 then
+game:GetService("ReplicatedStorage").Events.Remote.PlayerUseMedkit:FireServer()
+   plr.Character:FindFirstChild("HumanoidRootPart").CFrame = plrs.Character:FindFirstChild("HumanoidRootPart").CFrame
+end
+  else
+  end
+   end
+ end
+
+  else
+   local args = {
+    [1] = "Blue"}
+    game:GetService("ReplicatedStorage").Events.Remote.PlayPressed:InvokeServer(unpack(args))
+   for i, plrs in pairs(game.Players:GetPlayers()) do
+wait(.05)
+     if plrs and plrs.Character ~= nil then
+  if plr.Character:FindFirstChild("HumanoidRootPart") and plrs.Character:FindFirstChild("HumanoidRootPart") and plrs.Team == plr.Team then
+if plrs.Character.Humanoid.Health < 100 then
+game:GetService("ReplicatedStorage").Events.Remote.PlayerUseMedkit:FireServer()
+   plr.Character:FindFirstChild("HumanoidRootPart").CFrame = plrs.Character:FindFirstChild("HumanoidRootPart").CFrame
+end
+  else
+    -- warn(plrs.Character:FindFirstChild("HumanoidRootPart"))
+  end
+     end
+ end
+  end
+  if autoheal == false then
+    break
+  end
+  until autoheal == false 
+  
+end
+
+  function trackflag()
+    plr.Character.HumanoidRootPart.CFrame = CFrame.new(underground)
+    wait() -- your base
+    if plr.Team == game:GetService("Teams")["Red"] and game.Workspace.AntiCheat:FindFirstChild("Red") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Red").Position = plr.Character.HumanoidRootPart.Position
+    game.Workspace.AntiCheat:FindFirstChild("Red").Transparency = 0.5
+     elseif plr.Team == game:GetService("Teams")["Blue"] and game.Workspace.AntiCheat:FindFirstChild("Blue") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Blue").Position = plr.Character.HumanoidRootPart.Position
+       game.Workspace.AntiCheat:FindFirstChild("Blue").Transparency = 0.5
+     end
+  wait(1.5)
+    if plr.Team == game:GetService("Teams")["Red"] and game.Workspace.AntiCheat:FindFirstChild("Red") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Red").Position = bpos
+     elseif plr.Team == game:GetService("Teams")["Blue"] and game.Workspace.AntiCheat:FindFirstChild("Blue") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Blue").Position = rpos
+     end
+    wait() -- enemies base
+  if plr.Team == game:GetService("Teams")["Red"] and game.Workspace.AntiCheat:FindFirstChild("Blue") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Blue").Position = plr.Character.HumanoidRootPart.Position
+    game.Workspace.AntiCheat:FindFirstChild("Blue").Transparency = 0.5
+     elseif plr.Team == game:GetService("Teams")["Blue"] and game.Workspace.AntiCheat:FindFirstChild("Red") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Red").Position = plr.Character.HumanoidRootPart.Position
+       game.Workspace.AntiCheat:FindFirstChild("Red").Transparency = 0.5
+     end
+  coregui:SetCore("SendNotification", {
+         Title = "Info:",
+         Text = "Loading..",
+         Icon = "rbxassetid://10355836102"})
+  wait(30)
+  coregui:SetCore("SendNotification", {
+         Title = "Info:",
+         Text = "Cooldown set, ready to grab the flag!",
+         Icon = "rbxassetid://10355836102"})
+  if plr.Team == game:GetService("Teams")["Red"] and game.Workspace.AntiCheat:FindFirstChild("Blue") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Blue").Position = bpos
+     elseif plr.Team == game:GetService("Teams")["Blue"] and game.Workspace.AntiCheat:FindFirstChild("Red") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Red").Position = rpos
+     end
+    --[[  if getflag == false or plr.Character:FindFirstChild("Humanoid").Health < 1 then
+        break
+      end]]
+  --  until getflag == false
+    ----
+    
+    flagdb = true
+     if plr.Team == game:GetService("Teams")["Red"] and game.Workspace.Map.Blue.Flag.Handle ~= nil then
+      game.Workspace.Map.Blue.Flag.Handle.Position = plr.Character.HumanoidRootPart.Position
+     elseif plr.Team == game:GetService("Teams")["Blue"] and game.Workspace.Map.Red.Flag.Handle ~= nil then
+      game.Workspace.Map.Red.Flag.Handle.Position = plr.Character.HumanoidRootPart.Position
+     end
+     coregui:SetCore("SendNotification", {
+         Title = "Info:",
+         Text = "Grabbing Flag",
+         Icon = "rbxassetid://10355836102"})
+     wait(30)
+     flagdb = false
+     coregui:SetCore("SendNotification", {
+         Title = "Info:",
+         Text = "Cooldown set",
+         Icon = "rbxassetid://10355836102"})
+     if plr.Character:FindFirstChild("FlagAccessory") then
+       wait()
+       coregui:SetCore("SendNotification", {
+         Title = "Info:",
+         Text = "Setting flag",
+         Icon = "rbxassetid://10355836102"})
+       
+       if plr.Team == game:GetService("Teams")["Red"] and game.Workspace.AntiCheat:FindFirstChild("Red") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Red").Position = plr.Character.HumanoidRootPart.Position
+    game.Workspace.AntiCheat:FindFirstChild("Red").Transparency = 0.5
+     elseif plr.Team == game:GetService("Teams")["Blue"] and game.Workspace.AntiCheat:FindFirstChild("Blue") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Blue").Position = plr.Character.HumanoidRootPart.Position
+       game.Workspace.AntiCheat:FindFirstChild("Blue").Transparency = 0.5
+     end
+  wait(1.5)
+    if plr.Team == game:GetService("Teams")["Red"] and game.Workspace.AntiCheat:FindFirstChild("Red") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Red").Position = bpos
+     elseif plr.Team == game:GetService("Teams")["Blue"] and game.Workspace.AntiCheat:FindFirstChild("Blue") ~= nil then
+      game.Workspace.AntiCheat:FindFirstChild("Blue").Position = rpos
+     end
+       wait()
+       if plr.Team == game:GetService("Teams")["Red"] and game.Workspace.Map.Blue.Flag.Handle ~= nil then
+         game.Workspace.Map.Red.Flag.Handle.Position = plr.Character.HumanoidRootPart.Position
+         wait()
+         game.Workspace.Map.Blue.Flag.Handle.Position = game.Workspace.Map.Blue.Flag.Handle.Position + Vector3.new(0,15,0)
+         game.Workspace.Map.Red.Flag.Handle.Position = game.Workspace.Map.Red.Flag.Handle.Position + Vector3.new(0,15,0)
+
+         elseif plr.Team == game:GetService("Teams")["Blue"] and game.Workspace.Map.Red.Flag.Handle ~= nil then
+           game.Workspace.Map.Blue.Flag.Handle.Position = plr.Character.HumanoidRootPart.Position
+           wait()
+           game.Workspace.Map.Red.Flag.Handle.Position = game.Workspace.Map.Red.Flag.Handle.Position + Vector3.new(0,15,0)
+           game.Workspace.Map.Blue.Flag.Handle.Position = game.Workspace.Map.Blue.Flag.Handle.Position + Vector3.new(0,15,0)
+
+       end
+     end
+   
+    ----
+    
+  end
+
+function onautore()
+  repeat 
+    wait()
+-- while wait() do
+-- plr.Character:FindFirstChild("Humanoid").Died:Connect(trackflag)
+  if plr.Character:FindFirstChild("Humanoid") then
+if plr.Character:FindFirstChild("Humanoid").Health < 5 then
+  wait()
+  if canspawn == false then
+    canspawn = true
+  if plr.Team == game:GetService("Teams")["Red"] then
+    local args = {
+    [1] = "Red"}
+    game:GetService("ReplicatedStorage").Events.Remote.PlayPressed:InvokeServer(unpack(args))
+
+  end
+  if plr.Team == game:GetService("Teams")["Blue"] then
+    local args = {
+    [1] = "Blue"}
+    game:GetService("ReplicatedStorage").Events.Remote.PlayPressed:InvokeServer(unpack(args))
+  end
+    wait(1)
+   --[[ cam.CameraType = "Custom"
+    cam.CameraSubject = plr.Character.Humanoid]]
+    canspawn = false
+  end
+end
+  end
+    if autore == false then
+      break
+    end
+  until autore == false
+end 
